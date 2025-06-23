@@ -18,18 +18,15 @@ public class ScannerController : MonoBehaviour
     private IDraggable draggable;
 
     private void Start()
-    {
-        
+    {       
         draggable = new ScannerDrag(transform, Camera.main, dragSmoothSpeed, fixedZ);
         barcodeDetector = new BarcodeDetector(scannerFace, barcodeLayer, detectionDistance);
-
-       
+  
         inputHandler = new ScannerInputHandler(draggable);
     }
 
     private void Update()
-    {
-        
+    {      
         inputHandler.HandleInput();
         barcodeDetector.DetectBarcodes();
     }

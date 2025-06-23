@@ -37,8 +37,7 @@ public class ScannerDrag : IDraggable
 
         Ray ray = mainCamera.ScreenPointToRay(inputPosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            
+        {           
             Vector3 targetPosition = hit.point ;
             targetPosition.z = scannerTransform.position.z;
 

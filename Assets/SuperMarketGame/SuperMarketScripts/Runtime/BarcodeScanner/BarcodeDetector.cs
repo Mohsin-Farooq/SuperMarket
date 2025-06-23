@@ -7,8 +7,6 @@ public class BarcodeDetector : IBarcodeDetector
     private readonly float detectionDistance;
 
     private float totalAmountData= 0;
-
-
     public BarcodeDetector(Transform scannerFace, LayerMask barcodeLayer, float detectionDistance)
     {
         this.scannerFace = scannerFace;
@@ -18,7 +16,6 @@ public class BarcodeDetector : IBarcodeDetector
 
     public void DetectBarcodes()
     {
-
         if (Physics.Raycast(scannerFace.position, scannerFace.forward, out RaycastHit hit, detectionDistance, barcodeLayer))
         {
             OnBarcodeDetected(hit.collider.gameObject);
@@ -32,11 +29,8 @@ public class BarcodeDetector : IBarcodeDetector
         if (item != null)
         {
             totalAmountData += item.Price;
-
             CashCounterEvent.OnAmountUpdate?.Invoke(totalAmountData);
-            Debug.Log($"Scanned Item: {item.ItemName}, Price: ${item.Price}");
-
-           
+            Debug.Log($"Scanned Item: {item.ItemName}, Price: ${item.Price}");  
         }
         else
         {

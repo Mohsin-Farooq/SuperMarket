@@ -76,9 +76,5 @@ public class CashCounter : MonoBehaviour
         enteredAmount = "";
         UpdateDisplay();
     }
-
-
- 
-
 }
 
