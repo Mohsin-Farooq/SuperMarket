@@ -506,6 +506,7 @@ GameObject:
   - component: {fileID: 554858108}
   - component: {fileID: 554858107}
   - component: {fileID: 554858106}
+  - component: {fileID: 554858111}
   m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
@@ -612,6 +613,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &554858111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554858105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13568ec7032420c488ed6b8feae98b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: d36f77502a3fdad4fa24f04f395ad8c3, type: 2}
 --- !u!1 &767915655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,7 +1397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1686803044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1413,11 +1427,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 900, y: 1600}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -1924,7 +1938,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18, y: 926}
+  m_AnchoredPosition: {x: 18, y: 744}
   m_SizeDelta: {x: 268.5, y: 154.6529}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1974822614

@@ -19,9 +19,25 @@ public class CashCounter : MonoBehaviour
         UpdateDisplay();
     }
 
+    private void OnEnable()
+    {
+        CashCounterEvent.OnAmountUpdate += updateAmountdue;
+    }
+
+    private void OnDisable()
+    {
+        CashCounterEvent.OnAmountUpdate -= updateAmountdue;
+    }
+
+    private void updateAmountdue(float amount)
+    {
+        amountDue = amount;
+        amountDueText.text = $"Amount Due: ${amountDue:F2}";
+    }
+
     private void UpdateDisplay()
     {
-        amountDueText.text = $"Amount Due: ${amountDue:F2}";
+       
         enteredAmountText.text = $"Entered: ${enteredAmount}";
     }
 
@@ -60,5 +76,9 @@ public class CashCounter : MonoBehaviour
         enteredAmount = "";
         UpdateDisplay();
     }
+
+
+ 
+
 }
 
