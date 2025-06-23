@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class ItemTouchInputHandler : ITouchInputHandler
 {
-    private readonly IRotatable rotatableObject; 
+    private readonly IRotatable rotatableObject;
+    private readonly Transform objectTransform;
     private Vector2 previousTouchPosition;
     private bool isRotating;
+    private Camera mainCamera;
 
-    public ItemTouchInputHandler(IRotatable rotatable)
+    public ItemTouchInputHandler(IRotatable rotatable, Transform objectTransform)
     {
         rotatableObject = rotatable;
+        this.objectTransform = objectTransform;
+        mainCamera = Camera.main;
     }
 
     public void HandleInput()
@@ -21,13 +25,16 @@ public class ItemTouchInputHandler : ITouchInputHandler
 
             if (touch.phase == TouchPhase.Began)
             {
-                previousTouchPosition = touch.position;
-                isRotating = true;
+                if (IsTouchingObject(touch.position))
+                {
+                    previousTouchPosition = touch.position;
+                    isRotating = true;
+                }
             }
             else if (touch.phase == TouchPhase.Moved && isRotating)
             {
                 Vector2 delta = touch.position - previousTouchPosition;
-                rotatableObject.Rotate(delta); 
+                rotatableObject.Rotate(delta);
                 previousTouchPosition = touch.position;
             }
             else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
@@ -35,5 +42,15 @@ public class ItemTouchInputHandler : ITouchInputHandler
                 isRotating = false;
             }
         }
+    }
+
+    private bool IsTouchingObject(Vector2 inputPosition)
+    {
+        Ray ray = mainCamera.ScreenPointToRay(inputPosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            return hit.transform == objectTransform;
+        }
+        return false;
     }
 }

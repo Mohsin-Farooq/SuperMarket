@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class SmoothTouchRotate : MonoBehaviour, IRotatable
+public class ItemRotater : MonoBehaviour, IRotatable
 {
     private ITouchInputHandler touchInputHandler;
     [SerializeField] private float RoationSpeed;
 
     private void Start()
     {
-        touchInputHandler = new ItemTouchInputHandler(this);
+        touchInputHandler = new ItemTouchInputHandler(this,transform);
     }
 
     private void Update()
