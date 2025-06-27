@@ -28,7 +28,6 @@ public class Item : MonoBehaviour
         StartCoroutine(SmoothResetScannerPos());
     }
 
-
     private IEnumerator SmoothResetScannerPos()
     {
         float duration = 0.2f;
@@ -42,8 +41,6 @@ public class Item : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-
-       // transform.position = startPosition;
          gameObject.SetActive(false);
     }
 
