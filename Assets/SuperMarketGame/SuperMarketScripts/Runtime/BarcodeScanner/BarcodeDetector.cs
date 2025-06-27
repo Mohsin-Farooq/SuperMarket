@@ -29,7 +29,9 @@ public class BarcodeDetector : IBarcodeDetector
                 DetectedObjects.Add(hit.collider.gameObject);
                 OnBarcodeDetected(hit.collider.gameObject);
                 ScannerController.ResetScannerPosition?.Invoke();
-                
+                Item.ItemPostionChange?.Invoke();
+
+
             }
         }
     }
