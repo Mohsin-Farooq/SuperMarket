@@ -20,7 +20,7 @@ public class ItemManager : MonoBehaviour
         {
             
             GameObject randomPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Count)];    
-            GameObject newItem = Instantiate(randomPrefab, cartPosition.position, Quaternion.identity);
+            GameObject newItem = Instantiate(randomPrefab, cartPosition.position,randomPrefab.transform.rotation);
             queueController.AddItemToQueue(newItem);
         }
     }

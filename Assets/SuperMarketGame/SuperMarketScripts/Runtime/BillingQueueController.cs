@@ -28,14 +28,21 @@ public class BillingQueueController : MonoBehaviour
     {
         isMoving = true;
 
-        while (itemQueue.Count > 0)
+        int currentRampIndex = 0;
+
+        while (itemQueue.Count > 0 && currentRampIndex < rampPositions.Count)
         {
             GameObject currentItem = itemQueue.Dequeue();
-            Transform randomTarget = rampPositions[Random.Range(0, rampPositions.Count)];
-            yield return MoveItemToRamp(currentItem, randomTarget.position);
+
+          
+            Transform targetPosition = rampPositions[currentRampIndex];
+            currentRampIndex++; 
+
+          
+            yield return MoveItemToRamp(currentItem, targetPosition.position);
         }
 
-        isMoving = false; 
+        isMoving = false;
     }
 
 
