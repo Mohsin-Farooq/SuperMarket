@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BarcodeDetector : IBarcodeDetector
@@ -6,7 +7,8 @@ public class BarcodeDetector : IBarcodeDetector
     private readonly LayerMask barcodeLayer;
     private readonly float detectionDistance;
 
-    private float totalAmountData= 0;
+    private HashSet<GameObject> DetectedObjects = new HashSet<GameObject>();
+    private float totalAmountData = 0;
     public BarcodeDetector(Transform scannerFace, LayerMask barcodeLayer, float detectionDistance)
     {
         this.scannerFace = scannerFace;
@@ -18,19 +20,23 @@ public class BarcodeDetector : IBarcodeDetector
     {
         if (Physics.Raycast(scannerFace.position, scannerFace.forward, out RaycastHit hit, detectionDistance, barcodeLayer))
         {
-            OnBarcodeDetected(hit.collider.gameObject);
+            if (!DetectedObjects.Contains(hit.collider.gameObject))
+            {
+                DetectedObjects.Add(hit.collider.gameObject);
+                OnBarcodeDetected(hit.collider.gameObject);
+            }
         }
     }
 
     public void OnBarcodeDetected(GameObject barcodeObject)
     {
-  
+
         Item item = barcodeObject.GetComponent<Item>();
         if (item != null)
         {
             totalAmountData += item.Price;
             CashCounterEvent.OnAmountUpdate?.Invoke(totalAmountData);
-            Debug.Log($"Scanned Item: {item.ItemName}, Price: ${item.Price}");  
+            Debug.Log($"Scanned Item: {item.ItemName}, Price: ${item.Price}");
         }
         else
         {
