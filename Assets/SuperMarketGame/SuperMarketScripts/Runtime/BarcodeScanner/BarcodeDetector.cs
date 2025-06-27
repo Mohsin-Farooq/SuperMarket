@@ -3,17 +3,21 @@ using UnityEngine;
 
 public class BarcodeDetector : IBarcodeDetector
 {
-    private readonly Transform scannerFace;
+    private  Transform scannerFace;
     private readonly LayerMask barcodeLayer;
     private readonly float detectionDistance;
+    
 
     private HashSet<GameObject> DetectedObjects = new HashSet<GameObject>();
     private float totalAmountData = 0;
+    private Vector3 ScannerStartpostion;
     public BarcodeDetector(Transform scannerFace, LayerMask barcodeLayer, float detectionDistance)
     {
         this.scannerFace = scannerFace;
         this.barcodeLayer = barcodeLayer;
         this.detectionDistance = detectionDistance;
+
+        ScannerStartpostion = scannerFace.position;
     }
 
     public void DetectBarcodes()
@@ -24,6 +28,8 @@ public class BarcodeDetector : IBarcodeDetector
             {
                 DetectedObjects.Add(hit.collider.gameObject);
                 OnBarcodeDetected(hit.collider.gameObject);
+                ScannerController.ResetScannerPosition?.Invoke();
+                
             }
         }
     }
@@ -43,4 +49,5 @@ public class BarcodeDetector : IBarcodeDetector
             Debug.LogWarning("Scanned object does not have an Item component!");
         }
     }
+  
 }
