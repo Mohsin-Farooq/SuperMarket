@@ -43,6 +43,7 @@ public class CashCounter : MonoBehaviour
 
     public void OnKeyPress(string key)
     {
+        Debug.Log("keypress");
         if (key == "." && enteredAmount.Contains(".")) return;
  
         enteredAmount += key;
