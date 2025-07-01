@@ -90,17 +90,16 @@ public class BillingQueueController : MonoBehaviour
         }
 
         item.transform.position = ScannedPosition.position;
-        item.GetComponent<Item>().enabled = true;
+        item.GetComponentInChildren<Item>().enabled = true;
     }
-
+    //function to call when item scanned
     public void ProcessScannedItem()
     {
         if (rampItems.Count > 0)
         {
             GameObject scannedItem = rampItems[0];
             rampItems.RemoveAt(0); 
-
-          
+            
             Debug.Log($"Scanned: {scannedItem.name}");
 
             if (rampItems.Count > 0)

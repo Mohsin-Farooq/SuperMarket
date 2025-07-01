@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44402185, g: 0.49316472, b: 0.57223153, a: 1}
+  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2472,7 +2472,9 @@ MonoBehaviour:
   - {fileID: 1009875740}
   StartPos: {fileID: 681102359}
   finalPosition: {fileID: 1093223217}
+  ScannedPosition: {fileID: 1093223217}
   moveSpeed: 0.3
+  rampItems: []
   BarCodeScanner: {fileID: 8782717280989484281}
 --- !u!4 &1693889277
 Transform:

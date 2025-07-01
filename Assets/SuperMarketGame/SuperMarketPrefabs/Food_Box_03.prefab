@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 4549817369693708065}
   - component: {fileID: 499614894026747459}
   - component: {fileID: 7400531309057063295}
-  - component: {fileID: 3893975081552530489}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Food_Box_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +32,8 @@ Transform:
   m_LocalPosition: {x: -0.15, y: -2.921, z: -6.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4253252167257504232}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 198.505}
 --- !u!33 &3234131085262225924
@@ -120,13 +120,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoationSpeed: 1
---- !u!114 &3893975081552530489
+--- !u!1 &8414118148921502160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4253252167257504232}
+  - component: {fileID: 7639097595622248179}
+  - component: {fileID: 1401592854220956888}
+  m_Layer: 3
+  m_Name: Barcode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4253252167257504232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8414118148921502160}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.2811, y: -0.049, z: 0.008}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5234459253233428485}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7639097595622248179
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8414118148921502160}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.18417466, y: 0, z: 0.1247373}
+  m_Center: {x: -0.0098259635, y: -0.020846844, z: 0.013933834}
+--- !u!114 &1401592854220956888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8274137819708720228}
+  m_GameObject: {fileID: 8414118148921502160}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13568ec7032420c488ed6b8feae98b0c, type: 3}

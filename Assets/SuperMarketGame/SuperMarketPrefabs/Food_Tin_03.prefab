@@ -1,5 +1,72 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6897972745900109778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1332926785471138257}
+  - component: {fileID: 7782228254861424688}
+  - component: {fileID: 9087118508126144881}
+  m_Layer: 3
+  m_Name: BarCode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1332926785471138257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6897972745900109778}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.4120305, z: -0, w: 0.9111701}
+  m_LocalPosition: {x: -0.0131857395, y: 0.15100002, z: -0.43284178}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3092327884182056336}
+  m_LocalEulerAnglesHint: {x: 0, y: -48.665, z: 0}
+--- !u!65 &7782228254861424688
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6897972745900109778}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.42633036, y: 0.14557624, z: 0}
+  m_Center: {x: 0.31368983, y: 0.115225434, z: -0.21796058}
+--- !u!114 &9087118508126144881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6897972745900109778}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13568ec7032420c488ed6b8feae98b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: d36f77502a3fdad4fa24f04f395ad8c3, type: 2}
 --- !u!1 &7824338427438118453
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,8 +80,7 @@ GameObject:
   - component: {fileID: 1137669500916068728}
   - component: {fileID: 3888671114435180113}
   - component: {fileID: 3677611011235538636}
-  - component: {fileID: 5030962070938470565}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Food_Tin_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +99,8 @@ Transform:
   m_LocalPosition: {x: -0.15, y: -3.03, z: -5.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1332926785471138257}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &6109722244640933162
@@ -122,16 +189,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoationSpeed: 1
---- !u!114 &5030962070938470565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7824338427438118453}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13568ec7032420c488ed6b8feae98b0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: d36f77502a3fdad4fa24f04f395ad8c3, type: 2}

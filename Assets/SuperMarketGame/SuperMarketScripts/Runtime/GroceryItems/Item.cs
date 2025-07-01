@@ -12,6 +12,8 @@ public class Item : MonoBehaviour
 
     public static Action ItemPostionChange;
 
+    
+    
     private void OnEnable()
     {
         ItemPostionChange += ChangeItemPos;
@@ -25,28 +27,22 @@ public class Item : MonoBehaviour
     private void ChangeItemPos()
     {
         StopAllCoroutines();
-        StartCoroutine(SmoothResetScannerPos());
+        StartCoroutine(SmoothResetItemPos());
     }
 
-    private IEnumerator SmoothResetScannerPos()
+    private IEnumerator SmoothResetItemPos()
     {
         float duration = 0.2f;
         float elapsed = 0f;
 
-        Vector3 initialPosition = transform.position;
-        Vector3 targetPosition = initialPosition + transform.right * 10.0f;
+        Vector3 initialPosition = transform.parent.position;
+        Vector3 targetPosition = initialPosition + transform.parent.right * 10.0f;
         while (elapsed < duration)
         {
-            transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsed / duration);
+            transform.parent.position = Vector3.Lerp(initialPosition, targetPosition, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
         }
-           gameObject.SetActive(false);
-         Invoke(nameof(itemToFinal),1);
-         
-    }
-    private void itemToFinal()
-    {
-        
-    }
+           transform.parent.gameObject.SetActive(false);     
+    }  
 }
