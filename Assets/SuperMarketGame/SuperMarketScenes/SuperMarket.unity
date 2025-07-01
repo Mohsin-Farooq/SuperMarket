@@ -2814,7 +2814,7 @@ MonoBehaviour:
   - {fileID: 1224106973}
   - {fileID: 1978305029}
   queueController: {fileID: 1693889276}
-  numberOfItemsToSpawn: 6
+  numberOfItemsToSpawn: 2
 --- !u!4 &1524015949
 Transform:
   m_ObjectHideFlags: 0
@@ -4169,6 +4169,34 @@ PrefabInstance:
     - target: {fileID: 6832414983194888508, guid: 525c2cd1bcbf56540aa68db49456c887, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093524540674712608, guid: 525c2cd1bcbf56540aa68db49456c887, type: 3}
+      propertyPath: m_Range
+      value: 3.9000993
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093524540674712608, guid: 525c2cd1bcbf56540aa68db49456c887, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093524540674712608, guid: 525c2cd1bcbf56540aa68db49456c887, type: 3}
+      propertyPath: m_Color.g
+      value: 0.12401071
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093524540674712608, guid: 525c2cd1bcbf56540aa68db49456c887, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9528302
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093524540674712608, guid: 525c2cd1bcbf56540aa68db49456c887, type: 3}
+      propertyPath: m_Intensity
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093524540674712608, guid: 525c2cd1bcbf56540aa68db49456c887, type: 3}
+      propertyPath: m_SpotAngle
+      value: 11.206
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093524540674712608, guid: 525c2cd1bcbf56540aa68db49456c887, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 8.145508
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

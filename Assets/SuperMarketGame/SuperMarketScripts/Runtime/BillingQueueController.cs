@@ -26,9 +26,7 @@ public class BillingQueueController : MonoBehaviour
 
     public void AddItemToQueue(GameObject item)
     {
-        itemQueue.Enqueue(item);
-
-       
+        itemQueue.Enqueue(item); 
     }
 
     public void ProcessItemOnRamp()
@@ -56,6 +54,7 @@ public class BillingQueueController : MonoBehaviour
         }
 
         isMoving = false;
+        yield return new WaitForSeconds(0.5f);
         ActivateScanner();
     }
 
@@ -123,6 +122,7 @@ public class BillingQueueController : MonoBehaviour
 
             if (rampItems.Count > 0)
             {
+               
                 StartCoroutine(MoveItemToScanner(rampItems[0]));
             }
             else
