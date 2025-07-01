@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
+  m_IndirectSpecularColor: {r: 0.44402185, g: 0.49316472, b: 0.57223153, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -557,7 +557,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.663, y: 0.252, z: -2.37}
-  m_LocalScale: {x: 0.14732145, y: 0.4464286, z: 0.47009498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8055602496161112500}
@@ -623,7 +623,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.433, y: 0.252, z: -2.409}
-  m_LocalScale: {x: 0.14732145, y: 0.4464286, z: 0.47009498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8055602496161112500}
@@ -685,7 +685,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.484, y: 0.252, z: -1.978}
-  m_LocalScale: {x: 0.14732145, y: 0.4464286, z: 0.47009498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8055602496161112500}
@@ -1092,7 +1092,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.163, y: 0.252, z: -2.678}
-  m_LocalScale: {x: 0.14732145, y: 0.4464286, z: 0.47009498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8055602496161112500}
@@ -1520,8 +1520,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.2, y: 0.252, z: -2.064}
-  m_LocalScale: {x: 0.14732145, y: 0.4464286, z: 0.47009498}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8055602496161112500}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1944,7 +1944,7 @@ Transform:
   m_GameObject: {fileID: 1093223216}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4, y: -0.16, z: -5.62}
+  m_LocalPosition: {x: 0.06, y: 0.388, z: -5.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2068,7 +2068,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.569, y: 0.252, z: -1.631}
-  m_LocalScale: {x: 0.14732145, y: 0.4464286, z: 0.47009498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8055602496161112500}
@@ -2255,7 +2255,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.131, y: 0.252, z: -1.533}
-  m_LocalScale: {x: 0.14732145, y: 0.4464286, z: 0.47009498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8055602496161112500}
@@ -2672,7 +2672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 397370658357299099, guid: e61fa5dc53230a84d8ff54bec85ea1cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.14
+      value: 4.33
       objectReference: {fileID: 0}
     - target: {fileID: 397370658357299099, guid: e61fa5dc53230a84d8ff54bec85ea1cc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3528,6 +3528,10 @@ PrefabInstance:
     - target: {fileID: 126083991832774818, guid: 525c2cd1bcbf56540aa68db49456c887, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5158532335624688082, guid: 525c2cd1bcbf56540aa68db49456c887, type: 3}
+      propertyPath: detectionDistance
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6832414983194888508, guid: 525c2cd1bcbf56540aa68db49456c887, type: 3}
       propertyPath: m_LocalPosition.x

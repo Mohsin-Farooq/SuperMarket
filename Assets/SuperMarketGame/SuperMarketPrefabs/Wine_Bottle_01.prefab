@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7121823747199931029}
   - component: {fileID: 7379217462136172434}
   - component: {fileID: 8940346123922276307}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wine_Bottle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54852883b6244d244a9bf3a914403d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoationSpeed: 0
+  RoationSpeed: 1
 --- !u!114 &8940346123922276307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,4 +134,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13568ec7032420c488ed6b8feae98b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
+  itemData: {fileID: 11400000, guid: d36f77502a3fdad4fa24f04f395ad8c3, type: 2}

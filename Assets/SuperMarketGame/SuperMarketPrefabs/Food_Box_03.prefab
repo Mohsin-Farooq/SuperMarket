@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 499614894026747459}
   - component: {fileID: 7400531309057063295}
   - component: {fileID: 3893975081552530489}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Food_Box_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54852883b6244d244a9bf3a914403d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoationSpeed: 0
+  RoationSpeed: 1
 --- !u!114 &3893975081552530489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,4 +132,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13568ec7032420c488ed6b8feae98b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
+  itemData: {fileID: 11400000, guid: d36f77502a3fdad4fa24f04f395ad8c3, type: 2}

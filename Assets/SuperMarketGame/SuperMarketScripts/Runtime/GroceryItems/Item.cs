@@ -41,7 +41,14 @@ public class Item : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-         gameObject.SetActive(false);
+           gameObject.SetActive(false);
+         Invoke(nameof(itemToFinal),1);
+         
     }
 
+
+    private void itemToFinal()
+    {
+        BillingQueueController.instance.MoveItemsToFinalPosition();
+    }
 }

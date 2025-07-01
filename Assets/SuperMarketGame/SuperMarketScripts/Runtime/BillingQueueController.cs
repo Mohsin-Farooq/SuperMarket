@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,13 @@ public class BillingQueueController : MonoBehaviour
     private bool isMoving = false;
 
     [SerializeField] private GameObject BarCodeScanner;
+    public static BillingQueueController instance;
+    private int lastProcessedRampIndex = 0;
+    private void Awake()
+    {
+        instance=this;
+    }
+
 
     public void AddItemToQueue(GameObject item)
     {
@@ -37,13 +45,13 @@ public class BillingQueueController : MonoBehaviour
             Transform targetPosition = rampPositions[currentRampIndex];
             currentRampIndex++;
 
-            yield return MoveItemToRamp(currentItem, targetPosition.position);
+            yield return MoveItemToRamp(currentItem, targetPosition.position,targetPosition);
         }
 
         isMoving = false;
     }
 
-    private IEnumerator MoveItemToRamp(GameObject item, Vector3 targetPosition)
+    private IEnumerator MoveItemToRamp(GameObject item, Vector3 targetPosition,Transform ParentPostion)
     {
         Vector3 startPosition = StartPos.position;
         float elapsedTime = 0f;
@@ -56,6 +64,7 @@ public class BillingQueueController : MonoBehaviour
         }
 
         item.transform.position = targetPosition;
+        item.transform.SetParent(ParentPostion);
 
         if (itemQueue.Count == 0)
         {
@@ -67,16 +76,24 @@ public class BillingQueueController : MonoBehaviour
 
     public void MoveItemsToFinalPosition()
     {
-        StartCoroutine(MoveItemsFromRampToFinal());
+        StartCoroutine(MoveSingleItemFromRampToFinal());
     }
-
-    private IEnumerator MoveItemsFromRampToFinal()
+    int i;
+    private IEnumerator MoveSingleItemFromRampToFinal()
     {
-        foreach (Transform rampPosition in rampPositions)
-        {
-            if (rampPosition.childCount > 0) 
+        int rampsCount = rampPositions.Count;
+       
+        while (i < rampsCount)
+        
+        { 
+            Debug.Log($"Ramp cound :{rampsCount} and i is {i}");
+           
+            Transform rampPosition = rampPositions[i];
+
+            if (rampPosition.childCount > 0)
             {
-                GameObject item = rampPosition.GetChild(0).gameObject; 
+                GameObject item = rampPosition.GetChild(0).gameObject;
+                item.GetComponent<Item>().enabled = true;
                 Vector3 startPosition = item.transform.position;
                 Vector3 targetPosition = finalPosition.position;
 
@@ -90,10 +107,12 @@ public class BillingQueueController : MonoBehaviour
                 }
 
                 item.transform.position = targetPosition;
-
-               
-                item.SetActive(false);
+                i++;
+                yield break;      
             }
+            
         }
+        
+        Debug.Log("No more items on any ramp.");
     }
 }
