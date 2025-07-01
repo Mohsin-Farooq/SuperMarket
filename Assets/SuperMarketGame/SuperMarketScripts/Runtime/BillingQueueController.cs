@@ -108,8 +108,13 @@ public class BillingQueueController : MonoBehaviour
             }
             else
             {
+
+                CameraTrigger.instacne.TriggerCameraWhenBill();
                 Debug.Log("All items scanned.");
+                
                 BarCodeScanner.gameObject.SetActive(false);
+
+
             }
         }
     }
