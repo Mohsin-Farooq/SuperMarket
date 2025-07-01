@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    public List<GameObject> itemPrefabs; 
-    public Transform cartPosition;
-    public BillingQueueController queueController; 
-    public int numberOfItemsToSpawn = 6; 
+    [SerializeField] private List<GameObject> itemPrefabs;
+    [SerializeField] private List<Transform> cartPositions;
+    [SerializeField] private BillingQueueController queueController;
+    [SerializeField] private int numberOfItemsToSpawn = 6;
 
     public void InstantiateRandomItems()
     {
@@ -16,15 +16,21 @@ public class ItemManager : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < numberOfItemsToSpawn; i++)
+        if (cartPositions == null || cartPositions.Count == 0)
         {
-            
-            GameObject randomPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Count)];    
-            GameObject newItem = Instantiate(randomPrefab, cartPosition.position,randomPrefab.transform.rotation);
+            Debug.LogWarning("No cart positions assigned!");
+            return;
+        }
+
+        for (int i = 0; i < Mathf.Min(numberOfItemsToSpawn, cartPositions.Count); i++)
+        {
+            GameObject randomPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Count)]; 
+            Transform spawnPosition = cartPositions[i];
+            GameObject newItem = Instantiate(randomPrefab, spawnPosition.position, randomPrefab.transform.rotation);
+            newItem.transform.SetParent(spawnPosition);
             queueController.AddItemToQueue(newItem);
         }
     }
-
 
     private void Start()
     {

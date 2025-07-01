@@ -27,6 +27,11 @@ public class BillingQueueController : MonoBehaviour
     {
         itemQueue.Enqueue(item);
 
+       
+    }
+
+    public void ProcessItemOnRamp()
+    {
         if (!isMoving)
         {
             StartCoroutine(ProcessQueue());
@@ -106,21 +111,15 @@ public class BillingQueueController : MonoBehaviour
             }
             else
             {
-
-                CameraTrigger.instacne.TriggerCameraWhenBill();
-             
-                
+                CameraTrigger.instacne.TriggerCameraWhenBill();                          
                 BarCodeScanner.gameObject.SetActive(false);
-
                 Invoke(nameof(EnableCanvas), 0.5f);
-
             }
         }
     }
 
     private void EnableCanvas()
     {
-
         Canvas.gameObject.SetActive(true);
         ButtonManager.gameObject.SetActive(true);
     }
