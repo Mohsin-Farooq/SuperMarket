@@ -7,7 +7,6 @@ public class ScannerController : MonoBehaviour
 {
     [Header("Drag Settings")]
     [SerializeField] private float dragSmoothSpeed = 15f;
-    [SerializeField] private float MaxX,MinX,MinY,MaxY;
 
     [Header("Barcode Settings")]
     [SerializeField] private Transform scannerFace;
@@ -38,7 +37,7 @@ public class ScannerController : MonoBehaviour
 
     private void Start()
     {       
-        draggable = new ScannerDrag(transform, Camera.main, dragSmoothSpeed, MinX,MaxX,MinY,MaxY);
+        draggable = new ScannerDrag(transform, Camera.main, dragSmoothSpeed, this);
         barcodeDetector = new BarcodeDetector(scannerFace, barcodeLayer, detectionDistance);
   
         inputHandler = new ScannerInputHandler(draggable);       

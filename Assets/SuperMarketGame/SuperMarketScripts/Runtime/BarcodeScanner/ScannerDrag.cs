@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScannerDrag : IDraggable
@@ -7,69 +6,99 @@ public class ScannerDrag : IDraggable
     private readonly Transform scannerTransform;
     private readonly Camera mainCamera;
     private readonly float dragSmoothSpeed;
-    private readonly float minX, maxX, minY, maxY;
+    private readonly MonoBehaviour coroutineRunner;
 
-    private float smoothSpeed = 50f; 
-    private Vector3 previousPosition;
-    private bool isDragging = false;
+    private float smoothSpeed = 50f;
+    private Vector3 initialPosition;
     private Vector3 dragOffset;
-    
-  
-
-    public ScannerDrag(Transform transform, Camera camera, float smoothSpeed,float MinX,float MaxX,float MinY, float MaxY)
+    private bool isDragging = false;
+    private int activeFingerId = -1;
+    private Coroutine snapBackCoroutine;
+    private Plane dragPlane;
+    public ScannerDrag(Transform transform, Camera camera, float smoothSpeed, MonoBehaviour coroutineHost)
     {
         scannerTransform = transform;
         mainCamera = camera;
         dragSmoothSpeed = smoothSpeed;
-        minX = MinX;
-        maxX = MaxX;
-        minY = MinY;
-        maxY = MaxY;
+        coroutineRunner = coroutineHost;
 
-
-
+        initialPosition = scannerTransform.position;
     }
 
-    public void StartDrag(Vector3 inputPosition)
+    public void StartDrag(Vector3 inputPosition, int fingerId)
     {
+        if (isDragging) return;
+
         Ray ray = mainCamera.ScreenPointToRay(inputPosition);
         if (Physics.Raycast(ray, out RaycastHit hit) && hit.transform == scannerTransform)
         {
-            dragOffset = scannerTransform.position - hit.point;
-            isDragging = true;
+           
+            
+            // Ray ray = mainCamera.ScreenPointToRay(inputPosition);
+            // if (Physics.Raycast(ray, out RaycastHit hit))
+            // {
+            //     Vector3 targetPosition = hit.point + dragOffset;
+            //     targetPosition.z = fixedZ;
+            //     scannerTransform.position = Vector3.Lerp(scannerTransform.position, targetPosition, lerpSpeed);
+            // }
+            
+            dragPlane = new Plane(Vector3.forward, new Vector3(0, 0, initialPosition.z));
+
+            if (dragPlane.Raycast(ray, out float distance))
+            {
+                Vector3 worldPoint = ray.GetPoint(distance);
+                dragOffset = scannerTransform.position - worldPoint;
+
+                isDragging = true;
+                activeFingerId = fingerId;
+
+                if (snapBackCoroutine != null)
+                    coroutineRunner.StopCoroutine(snapBackCoroutine);
+            }
         }
     }
 
-    public void Drag(Vector3 inputPosition)
+    public void Drag(Vector3 inputPosition, int fingerId)
     {
-        if (!isDragging) return;
+        if (!isDragging || fingerId != activeFingerId) return;
 
-     
         Ray ray = mainCamera.ScreenPointToRay(inputPosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (dragPlane.Raycast(ray, out float distance))
         {
-            Vector3 targetPosition = hit.point + dragOffset;
+            Vector3 worldPoint = ray.GetPoint(distance);
+            Vector3 targetPosition = worldPoint + dragOffset;
 
-           
-            targetPosition.z = scannerTransform.position.z;
+            targetPosition.z = initialPosition.z; // Keep Z locked
+            
 
-          
-            //targetPosition.x = Mathf.Clamp(targetPosition.x, minX, maxX);
-            //targetPosition.y = Mathf.Clamp(targetPosition.y, minY, maxY);
-
-           
-            float lerpSpeed = Time.deltaTime * smoothSpeed;
+            float lerpSpeed = Time.deltaTime * dragSmoothSpeed;
             scannerTransform.position = Vector3.Lerp(scannerTransform.position, targetPosition, lerpSpeed);
-
-           
-            previousPosition = scannerTransform.position;
         }
     }
 
-
-
-    public void EndDrag()
+    public void EndDrag(int fingerId)
     {
+        if (!isDragging || fingerId != activeFingerId) return;
+
         isDragging = false;
+        activeFingerId = -1;
+
+        snapBackCoroutine = coroutineRunner.StartCoroutine(SmoothSnapBack());
+    }
+
+    private IEnumerator SmoothSnapBack()
+    {
+        Vector3 startPos = scannerTransform.position;
+        float duration = 0.3f;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            scannerTransform.position = Vector3.Lerp(startPos, initialPosition, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        scannerTransform.position = initialPosition;
     }
 }

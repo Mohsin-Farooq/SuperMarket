@@ -3,6 +3,7 @@ using UnityEngine;
 public class ScannerInputHandler : ITouchInputHandler
 {
     private readonly IDraggable dragHandler;
+    private int activeFingerId = -1;
 
     public ScannerInputHandler(IDraggable dragHandler)
     {
@@ -11,24 +12,36 @@ public class ScannerInputHandler : ITouchInputHandler
 
     public void HandleInput()
     {
-        if (Input.touchCount == 1)
+        if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
-
-            switch (touch.phase)
+            foreach (Touch touch in Input.touches)
             {
-                case TouchPhase.Began:
-                    dragHandler.StartDrag(touch.position);
-                    break;
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        if (activeFingerId == -1)
+                        {
+                            dragHandler.StartDrag(touch.position, touch.fingerId);
+                            activeFingerId = touch.fingerId;
+                        }
+                        break;
 
-                case TouchPhase.Moved:
-                    dragHandler.Drag(touch.position);
-                    break;
+                    case TouchPhase.Moved:
+                        if (touch.fingerId == activeFingerId)
+                        {
+                            dragHandler.Drag(touch.position, touch.fingerId);
+                        }
+                        break;
 
-                case TouchPhase.Ended:
-                case TouchPhase.Canceled:
-                    dragHandler.EndDrag();
-                    break;
+                    case TouchPhase.Ended:
+                    case TouchPhase.Canceled:
+                        if (touch.fingerId == activeFingerId)
+                        {
+                            dragHandler.EndDrag(touch.fingerId);
+                            activeFingerId = -1;
+                        }
+                        break;
+                }
             }
         }
     }
