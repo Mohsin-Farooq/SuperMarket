@@ -2830,6 +2830,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1546819772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1546819774}
+  - component: {fileID: 1546819773}
+  m_Layer: 0
+  m_Name: PlaneVisualizer
+  m_TagString: EditorOnly
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1546819773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546819772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb5e3d8f8be617449a31d7a3c38b54e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planeZ: -7.38
+  planeSize: 5
+  gridLines: 10
+  planeColor: {r: 0, g: 1, b: 0, a: 1}
+  normalColor: {r: 1, g: 0, b: 0, a: 1}
+  drawTestRay: 0
+  testRayOrigin: {x: 0, y: 0, z: -5}
+  testRayDirection: {x: 0, y: 0, z: 1}
+  rayColor: {r: 0, g: 0, b: 1, a: 1}
+--- !u!4 &1546819774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546819772}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.9778242, y: -3.8075886, z: 0.24530242}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1559639387
 GameObject:
   m_ObjectHideFlags: 0
@@ -4596,3 +4649,4 @@ SceneRoots:
   - {fileID: 179211694}
   - {fileID: 8501494776796603506}
   - {fileID: 1987260339}
+  - {fileID: 1546819774}

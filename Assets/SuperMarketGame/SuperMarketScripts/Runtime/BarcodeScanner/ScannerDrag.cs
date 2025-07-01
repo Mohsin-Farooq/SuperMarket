@@ -101,4 +101,7 @@ public class ScannerDrag : IDraggable
 
         scannerTransform.position = initialPosition;
     }
+    
+    
+    
 }
