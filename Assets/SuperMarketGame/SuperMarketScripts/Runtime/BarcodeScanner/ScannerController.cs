@@ -74,4 +74,33 @@ public class ScannerController : MonoBehaviour
 
         transform.position = startPosition;
     }
+
+
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (scannerFace != null)
+        {
+          
+            Gizmos.color = Color.red;
+
+            
+            Vector3 rayDirection = scannerFace.forward * detectionDistance;
+
+           
+            Gizmos.DrawLine(scannerFace.position, scannerFace.position + rayDirection);
+
+            
+            if (Physics.Raycast(scannerFace.position, scannerFace.forward, out RaycastHit hit, detectionDistance, barcodeLayer))
+            {
+              
+                Gizmos.color = Color.green;
+                Gizmos.DrawSphere(hit.point, 0.1f);
+            }
+        }
+    }
+
+#endif
+
 }

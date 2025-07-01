@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 675214919167358515}
   - component: {fileID: 6716298292084270631}
   - component: {fileID: 2085854701581799992}
-  - component: {fileID: 1942738275810383261}
   - component: {fileID: 1626773354995622845}
+  - component: {fileID: 1196183639095654095}
   m_Layer: 0
   m_Name: Food_Box_04
   m_TagString: Untagged
@@ -86,7 +86,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1942738275810383261
+--- !u!114 &1626773354995622845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3272796145163753739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54852883b6244d244a9bf3a914403d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RoationSpeed: 1
+--- !u!65 &1196183639095654095
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,20 +119,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.0668, y: 1.6594665, z: 0.46126428}
-  m_Center: {x: 0, y: 0.82973325, z: 0}
---- !u!114 &1626773354995622845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3272796145163753739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54852883b6244d244a9bf3a914403d8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RoationSpeed: 1
+  m_Center: {x: 0, y: 0, z: 0.000000029802322}
 --- !u!1 &6129904403526300105
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 6129904403526300105}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0.201, z: 0.058}
+  m_LocalPosition: {x: 0.25, y: -0.61, z: 0.058}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -172,8 +172,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3189245, y: 0.21974325, z: 0}
-  m_Center: {x: 0.0663789, y: 0.018116951, z: -0.29094386}
+  m_Size: {x: 0.3189245, y: 0.26415324, z: 0}
+  m_Center: {x: 0.06637889, y: -0.004088044, z: -0.29094386}
 --- !u!114 &5213802090217491108
 MonoBehaviour:
   m_ObjectHideFlags: 0
