@@ -1068,7 +1068,7 @@ Transform:
   m_GameObject: {fileID: 681102358}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 15.61, z: 0}
+  m_LocalPosition: {x: 0, y: 1.94, z: 4.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2814,7 +2814,7 @@ MonoBehaviour:
   - {fileID: 1224106973}
   - {fileID: 1978305029}
   queueController: {fileID: 1693889276}
-  numberOfItemsToSpawn: 2
+  numberOfItemsToSpawn: 6
 --- !u!4 &1524015949
 Transform:
   m_ObjectHideFlags: 0
@@ -3270,7 +3270,8 @@ MonoBehaviour:
   StartPos: {fileID: 681102359}
   finalPosition: {fileID: 1093223217}
   ScannedPosition: {fileID: 1093223217}
-  moveSpeed: 0.3
+  itemMovingSpeed: 0.5
+  AllItemTimeToSpawnOnRamp: 0.1
   BarCodeScanner: {fileID: 8782717280989484281}
   Canvas: {fileID: 1686803043}
   ButtonManager: {fileID: 179211692}

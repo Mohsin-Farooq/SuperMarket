@@ -9,7 +9,8 @@ public class BillingQueueController : MonoBehaviour
     public Transform StartPos;
     public Transform finalPosition;
     public Transform ScannedPosition; 
-    public float moveSpeed = 5f;
+    public float itemMovingSpeed = 5f;
+    [SerializeField] private float AllItemTimeToSpawnOnRamp;
 
     private Queue<GameObject> itemQueue = new Queue<GameObject>();
     private List<GameObject> rampItems = new List<GameObject>();
@@ -50,7 +51,8 @@ public class BillingQueueController : MonoBehaviour
             currentRampIndex++;
 
             rampItems.Add(currentItem);
-            yield return MoveItemToRamp(currentItem, targetPosition.position);
+            StartCoroutine(MoveItemToRamp(currentItem, targetPosition.position));
+            yield return new WaitForSeconds(AllItemTimeToSpawnOnRamp);
         }
 
         isMoving = false;
@@ -59,18 +61,32 @@ public class BillingQueueController : MonoBehaviour
 
     private IEnumerator MoveItemToRamp(GameObject item, Vector3 targetPosition)
     {
-        Vector3 startPosition = StartPos.position;
+        Vector3 startPosition = item.transform.position;
+        Vector3 midPosition = new Vector3(startPosition.x, startPosition.y + 12f, startPosition.z); 
         float elapsedTime = 0f;
+        float totalDuration = itemMovingSpeed;
 
-        while (elapsedTime < moveSpeed)
+        while (elapsedTime < totalDuration)
         {
             elapsedTime += Time.deltaTime;
-            item.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / moveSpeed);
+
+            
+            float t = elapsedTime / totalDuration;
+
+           
+            Vector3 curvePosition = Vector3.Lerp(
+                Vector3.Lerp(startPosition, midPosition, t),
+                Vector3.Lerp(midPosition, targetPosition, t),
+                t
+            );
+
+            item.transform.position = curvePosition;
+
             yield return null;
         }
-
         item.transform.position = targetPosition;
     }
+
 
     private void ActivateScanner()
     {
@@ -87,10 +103,10 @@ public class BillingQueueController : MonoBehaviour
         Vector3 startPosition = item.transform.position;
         float elapsedTime = 0f;
 
-        while (elapsedTime < moveSpeed)
+        while (elapsedTime < itemMovingSpeed)
         {
             elapsedTime += Time.deltaTime;
-            item.transform.position = Vector3.Lerp(startPosition, ScannedPosition.position, elapsedTime / moveSpeed);
+            item.transform.position = Vector3.Lerp(startPosition, ScannedPosition.position, elapsedTime / itemMovingSpeed);
             yield return null;
         }
 
