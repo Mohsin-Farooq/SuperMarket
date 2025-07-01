@@ -32,18 +32,17 @@ public class CashCounter : MonoBehaviour
     private void updateAmountdue(float amount)
     {
         amountDue = amount;
-        amountDueText.text = $"Amount Due: ${amountDue:F2}";
+        amountDueText.text = $"$:{amountDue}";
     }
 
     private void UpdateDisplay()
     {
-       
-        enteredAmountText.text = $"Entered: ${enteredAmount}";
+
+        enteredAmountText.text = enteredAmount.ToString();
     }
 
     public void OnKeyPress(string key)
     {
-        Debug.Log("keypress");
         if (key == "." && enteredAmount.Contains(".")) return;
  
         enteredAmount += key;
