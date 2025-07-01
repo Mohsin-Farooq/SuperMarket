@@ -8,19 +8,20 @@ public class BillingQueueController : MonoBehaviour
     public List<Transform> rampPositions;
     public Transform StartPos;
     public Transform finalPosition;
+    public Transform ScannedPosition; 
     public float moveSpeed = 5f;
 
     private Queue<GameObject> itemQueue = new Queue<GameObject>();
+  [SerializeField]  private List<GameObject> rampItems = new List<GameObject>();
     private bool isMoving = false;
 
     [SerializeField] private GameObject BarCodeScanner;
     public static BillingQueueController instance;
-    private int lastProcessedRampIndex = 0;
+
     private void Awake()
     {
-        instance=this;
+        instance = this;
     }
-
 
     public void AddItemToQueue(GameObject item)
     {
@@ -35,23 +36,23 @@ public class BillingQueueController : MonoBehaviour
     private IEnumerator ProcessQueue()
     {
         isMoving = true;
-
         int currentRampIndex = 0;
 
         while (itemQueue.Count > 0 && currentRampIndex < rampPositions.Count)
         {
             GameObject currentItem = itemQueue.Dequeue();
-
             Transform targetPosition = rampPositions[currentRampIndex];
             currentRampIndex++;
 
-            yield return MoveItemToRamp(currentItem, targetPosition.position,targetPosition);
+            rampItems.Add(currentItem);
+            yield return MoveItemToRamp(currentItem, targetPosition.position);
         }
 
         isMoving = false;
+        ActivateScanner();
     }
 
-    private IEnumerator MoveItemToRamp(GameObject item, Vector3 targetPosition,Transform ParentPostion)
+    private IEnumerator MoveItemToRamp(GameObject item, Vector3 targetPosition)
     {
         Vector3 startPosition = StartPos.position;
         float elapsedTime = 0f;
@@ -64,55 +65,53 @@ public class BillingQueueController : MonoBehaviour
         }
 
         item.transform.position = targetPosition;
-        item.transform.SetParent(ParentPostion);
+    }
 
-        if (itemQueue.Count == 0)
+    private void ActivateScanner()
+    {
+        if (rampItems.Count > 0)
         {
-            CameraTrigger.instacne.TriggerCameraWhenScan();
             BarCodeScanner.gameObject.SetActive(true);
-            MoveItemsToFinalPosition();
+            CameraTrigger.instacne.TriggerCameraWhenScan();
+            StartCoroutine(MoveItemToScanner(rampItems[0]));
         }
     }
 
-    public void MoveItemsToFinalPosition()
+    private IEnumerator MoveItemToScanner(GameObject item)
     {
-        StartCoroutine(MoveSingleItemFromRampToFinal());
-    }
-    int i;
-    private IEnumerator MoveSingleItemFromRampToFinal()
-    {
-        int rampsCount = rampPositions.Count;
-       
-        while (i < rampsCount)
-        
-        { 
-            Debug.Log($"Ramp cound :{rampsCount} and i is {i}");
-           
-            Transform rampPosition = rampPositions[i];
+        Vector3 startPosition = item.transform.position;
+        float elapsedTime = 0f;
 
-            if (rampPosition.childCount > 0)
+        while (elapsedTime < moveSpeed)
+        {
+            elapsedTime += Time.deltaTime;
+            item.transform.position = Vector3.Lerp(startPosition, ScannedPosition.position, elapsedTime / moveSpeed);
+            yield return null;
+        }
+
+        item.transform.position = ScannedPosition.position;
+        item.GetComponent<Item>().enabled = true;
+    }
+
+    public void ProcessScannedItem()
+    {
+        if (rampItems.Count > 0)
+        {
+            GameObject scannedItem = rampItems[0];
+            rampItems.RemoveAt(0); 
+
+          
+            Debug.Log($"Scanned: {scannedItem.name}");
+
+            if (rampItems.Count > 0)
             {
-                GameObject item = rampPosition.GetChild(0).gameObject;
-                item.GetComponent<Item>().enabled = true;
-                Vector3 startPosition = item.transform.position;
-                Vector3 targetPosition = finalPosition.position;
-
-                float elapsedTime = 0f;
-
-                while (elapsedTime < moveSpeed)
-                {
-                    elapsedTime += Time.deltaTime;
-                    item.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / moveSpeed);
-                    yield return null;
-                }
-
-                item.transform.position = targetPosition;
-                i++;
-                yield break;      
+                StartCoroutine(MoveItemToScanner(rampItems[0]));
             }
-            
+            else
+            {
+                Debug.Log("All items scanned.");
+                BarCodeScanner.gameObject.SetActive(false);
+            }
         }
-        
-        Debug.Log("No more items on any ramp.");
     }
 }

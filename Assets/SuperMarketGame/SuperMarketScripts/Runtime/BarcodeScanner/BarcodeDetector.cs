@@ -53,6 +53,7 @@ public class BarcodeDetector : IBarcodeDetector
     {
         ScannerController.ResetScannerPosition?.Invoke();
         Item.ItemPostionChange?.Invoke();
+        BillingQueueController.instance.ProcessScannedItem();
     }
   
 }

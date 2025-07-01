@@ -45,10 +45,8 @@ public class Item : MonoBehaviour
          Invoke(nameof(itemToFinal),1);
          
     }
-
-
     private void itemToFinal()
     {
-        BillingQueueController.instance.MoveItemsToFinalPosition();
+        
     }
 }
