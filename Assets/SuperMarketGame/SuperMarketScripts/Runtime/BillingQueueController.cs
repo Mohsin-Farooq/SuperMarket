@@ -12,10 +12,10 @@ public class BillingQueueController : MonoBehaviour
     public float moveSpeed = 5f;
 
     private Queue<GameObject> itemQueue = new Queue<GameObject>();
-  [SerializeField]  private List<GameObject> rampItems = new List<GameObject>();
+    private List<GameObject> rampItems = new List<GameObject>();
     private bool isMoving = false;
 
-    [SerializeField] private GameObject BarCodeScanner;
+    [SerializeField] private GameObject BarCodeScanner,Canvas,ButtonManager;
     public static BillingQueueController instance;
 
     private void Awake()
@@ -98,9 +98,7 @@ public class BillingQueueController : MonoBehaviour
         if (rampItems.Count > 0)
         {
             GameObject scannedItem = rampItems[0];
-            rampItems.RemoveAt(0); 
-            
-            Debug.Log($"Scanned: {scannedItem.name}");
+            rampItems.RemoveAt(0);        
 
             if (rampItems.Count > 0)
             {
@@ -110,12 +108,20 @@ public class BillingQueueController : MonoBehaviour
             {
 
                 CameraTrigger.instacne.TriggerCameraWhenBill();
-                Debug.Log("All items scanned.");
+             
                 
                 BarCodeScanner.gameObject.SetActive(false);
 
+                Invoke(nameof(EnableCanvas), 0.5f);
 
             }
         }
+    }
+
+    private void EnableCanvas()
+    {
+
+        Canvas.gameObject.SetActive(true);
+        ButtonManager.gameObject.SetActive(true);
     }
 }

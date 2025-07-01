@@ -10,7 +10,7 @@ public class ButtonManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) 
         {
-            Debug.Log("ggg");
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, buttonLayer))
             {
