@@ -6,7 +6,7 @@ public class ScannerDrag : IDraggable
     private readonly Transform scannerTransform;
     private readonly Camera mainCamera;
     private readonly float dragSmoothSpeed;
-    private readonly MonoBehaviour coroutineRunner;
+    private  MonoBehaviour coroutineRunner;
 
     private float smoothSpeed = 50f;
     private Vector3 initialPosition;
@@ -27,6 +27,8 @@ public class ScannerDrag : IDraggable
 
     public void StartDrag(Vector3 inputPosition, int fingerId)
     {
+        coroutineRunner.enabled = true;
+
         if (isDragging) return;
 
         Ray ray = mainCamera.ScreenPointToRay(inputPosition);

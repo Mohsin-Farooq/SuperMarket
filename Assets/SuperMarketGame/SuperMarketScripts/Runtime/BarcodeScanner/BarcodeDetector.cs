@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,7 +54,7 @@ public class BarcodeDetector : IBarcodeDetector
     {
         ScannerController.ResetScannerPosition?.Invoke();
         Item.ItemPostionChange?.Invoke();
-        BillingQueueController.instance.ProcessScannedItem();
+        BillingQueueController.instance.ProcessItemWithDelay();
+
     }
-  
 }

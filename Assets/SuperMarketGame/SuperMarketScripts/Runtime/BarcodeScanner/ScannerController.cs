@@ -59,6 +59,9 @@ public class ScannerController : MonoBehaviour
 
     private IEnumerator SmoothResetScannerPos()
     {
+        
+        this.enabled = false;
+
         float duration = 0.2f; 
         float elapsed = 0f;
 
@@ -72,6 +75,7 @@ public class ScannerController : MonoBehaviour
         }
 
         transform.position = startPosition;
+        this.enabled = true;
     }
 
 

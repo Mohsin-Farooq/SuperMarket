@@ -16,12 +16,18 @@ public class Item : MonoBehaviour
     
     private void OnEnable()
     {
-        ItemPostionChange += ChangeItemPos;
+        ItemPostionChange += ItemPosDelay;
     }
 
     private void OnDisable()
     {
-        ItemPostionChange -= ChangeItemPos;
+        ItemPostionChange -= ItemPosDelay;
+    }
+
+
+    private void ItemPosDelay()
+    {
+        Invoke(nameof(ChangeItemPos), 0.3f);
     }
 
     private void ChangeItemPos()
@@ -32,7 +38,7 @@ public class Item : MonoBehaviour
 
     private IEnumerator SmoothResetItemPos()
     {
-        float duration = 0.2f;
+        float duration = 0.5f;
         float elapsed = 0f;
 
         Vector3 initialPosition = transform.parent.position;

@@ -113,7 +113,14 @@ public class BillingQueueController : MonoBehaviour
         item.GetComponentInChildren<Item>().enabled = true;
     }
     //function to call when item scanned
-    public void ProcessScannedItem()
+
+
+    public void ProcessItemWithDelay()
+    {
+        Invoke(nameof(ProcessScannedItem), 1f);
+    }
+
+    private void ProcessScannedItem()
     {
         if (rampItems.Count > 0)
         {
