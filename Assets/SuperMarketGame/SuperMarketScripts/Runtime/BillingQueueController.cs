@@ -16,7 +16,7 @@ public class BillingQueueController : MonoBehaviour
     private List<GameObject> rampItems = new List<GameObject>();
     private bool isMoving = false;
 
-    [SerializeField] private GameObject BarCodeScanner,Canvas,ButtonManager;
+    [SerializeField] private GameObject BarCodeScanner,Canvas,ButtonManager,ScanPannel,InfoText;
     public static BillingQueueController instance;
 
     private void Awake()
@@ -106,8 +106,11 @@ public class BillingQueueController : MonoBehaviour
         }
 
         item.transform.position = ScannedPosition.position;
+        item.GetComponent<ItemRotater>().enabled = true;
         item.GetComponentInChildren<Item>().enabled = true;
         BarCodeScanner.gameObject.SetActive(true);
+        ScanPannel.SetActive(true);
+
     }
     //function to call when item scanned
     public void ProcessItemWithDelay()
@@ -126,9 +129,11 @@ public class BillingQueueController : MonoBehaviour
             {
                
                 StartCoroutine(MoveItemToScanner(rampItems[0]));
+                InfoText.SetActive(false);
             }
             else
             {
+                ScanPannel.SetActive(false);
                 CameraTrigger.instacne.TriggerCameraWhenBill();                          
                 BarCodeScanner.gameObject.SetActive(false);
                 Invoke(nameof(EnableCanvas), 0.5f);
@@ -137,6 +142,7 @@ public class BillingQueueController : MonoBehaviour
     }
     private void EnableCanvas()
     {
+      
         Canvas.gameObject.SetActive(true);
         ButtonManager.gameObject.SetActive(true);
     }

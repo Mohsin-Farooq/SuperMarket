@@ -9,7 +9,7 @@ public class ItemTouchInputHandler : ITouchInputHandler
     private Vector2 previousTouchPosition;
     private bool isRotating;
     private Camera mainCamera;
-
+   
     public ItemTouchInputHandler(IRotatable rotatable, Transform objectTransform)
     {
         rotatableObject = rotatable;
