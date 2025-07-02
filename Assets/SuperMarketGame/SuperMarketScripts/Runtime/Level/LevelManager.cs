@@ -49,7 +49,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator ReloadLevelSmoothly()
     {
-        yield return new WaitForSeconds(0.7f); 
+        yield return new WaitForSeconds(1.2f); 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

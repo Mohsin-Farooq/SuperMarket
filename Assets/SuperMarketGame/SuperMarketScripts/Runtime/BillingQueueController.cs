@@ -53,7 +53,7 @@ public class BillingQueueController : MonoBehaviour
         }
 
         isMoving = false;
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1f);
         ActivateScanner();
     }
     private IEnumerator MoveItemToRamp(GameObject item, Vector3 targetPosition)
@@ -91,6 +91,7 @@ public class BillingQueueController : MonoBehaviour
             CameraTrigger.instacne.TriggerCameraWhenScan();    
             StartCoroutine(MoveItemToScanner(rampItems[0]));
         }
+        
     }
 
     private IEnumerator MoveItemToScanner(GameObject item)
@@ -109,8 +110,8 @@ public class BillingQueueController : MonoBehaviour
         item.GetComponent<ItemRotater>().enabled = true;
         item.GetComponentInChildren<Item>().enabled = true;
         BarCodeScanner.gameObject.SetActive(true);
-        ScanPannel.SetActive(true);
 
+        ScanPannel.SetActive(true);
     }
     //function to call when item scanned
     public void ProcessItemWithDelay()
