@@ -1036,7 +1036,6 @@ Transform:
   m_Children:
   - {fileID: 610716619}
   - {fileID: 1452927918}
-  - {fileID: 2142579807}
   - {fileID: 1605784312}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1224,7 +1223,7 @@ GameObject:
   - component: {fileID: 400104979}
   - component: {fileID: 400104981}
   m_Layer: 0
-  m_Name: Cash_Machine1 (1)
+  m_Name: CardMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1247,7 +1246,7 @@ Transform:
   - {fileID: 1615739908}
   - {fileID: 121566068}
   - {fileID: 1965584187}
-  m_Father: {fileID: 610716619}
+  m_Father: {fileID: 1093496085}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &400104979
 MeshRenderer:
@@ -1756,11 +1755,10 @@ Transform:
   - {fileID: 887115124}
   - {fileID: 156875897}
   - {fileID: 876734558}
-  - {fileID: 400104978}
-  - {fileID: 3706756803029779107}
   - {fileID: 1664061588521593543}
   - {fileID: 8782717280989484284}
   - {fileID: 8501494776796603506}
+  - {fileID: 1093496085}
   m_Father: {fileID: 273968605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &633512614
@@ -3106,6 +3104,39 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1452927918}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1093496084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1093496085}
+  m_Layer: 0
+  m_Name: PaymentMachine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1093496085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093496084}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 400104978}
+  - {fileID: 3706756803029779107}
+  m_Father: {fileID: 610716619}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1097102407
 GameObject:
@@ -6500,54 +6531,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137658520}
   m_CullTransparentMesh: 1
---- !u!1 &2142579805
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2142579807}
-  - component: {fileID: 2142579806}
-  m_Layer: 0
-  m_Name: CashCounter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &2142579806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142579805}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e12ed57272e4a4485419d1eb9f86d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentMode: 0
-  amountDueText: {fileID: 1974822614}
-  enteredAmountText: {fileID: 78517243}
-  amountDue: 100
---- !u!4 &2142579807
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142579805}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.2066708, y: 4.0658193, z: -3.4286883}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 273968605}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &255219766728288717
 GameObject:
   m_ObjectHideFlags: 0
@@ -6830,7 +6813,7 @@ GameObject:
   - component: {fileID: 1133890511387974133}
   - component: {fileID: 5363561997007291885}
   m_Layer: 0
-  m_Name: Cash_Machine2
+  m_Name: CashMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7111,7 +7094,7 @@ Transform:
   m_Children:
   - {fileID: 654370116}
   - {fileID: 4812478436182162942}
-  m_Father: {fileID: 610716619}
+  m_Father: {fileID: 1093496085}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4026652153316470947
 MeshFilter:
