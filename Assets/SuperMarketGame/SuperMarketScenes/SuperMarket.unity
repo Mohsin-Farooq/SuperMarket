@@ -3794,7 +3794,6 @@ MonoBehaviour:
   - {fileID: 866831212262376928, guid: e61fa5dc53230a84d8ff54bec85ea1cc, type: 3}
   - {fileID: 2979608030755037426, guid: 2283e605219c8b44f9f26c34f81ee94b, type: 3}
   - {fileID: 4334981068783823776, guid: be1d682f694647d4bbad98fe56faf9a9, type: 3}
-  - {fileID: 8274137819708720228, guid: b88d4113a7f3979439d42151d075d19e, type: 3}
   - {fileID: 7824338427438118453, guid: bfda377ddbda2e347b98192668a2bbe9, type: 3}
   - {fileID: 8946623178317202765, guid: e6ef0822169524544b007de854c254d6, type: 3}
   - {fileID: 171020432944930212, guid: 175b64f4b8d8e7f49a0b640461c1e9fe, type: 3}
@@ -4893,7 +4892,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!225 &1851655104
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4902,7 +4901,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1851655103}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -5573,6 +5572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GamelogicStart: {fileID: 9128990888527969993}
+  Cart: {fileID: 9128990888527969992}
 --- !u!1 &2091736353
 GameObject:
   m_ObjectHideFlags: 0
@@ -5835,7 +5835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6832414983194888508, guid: 525c2cd1bcbf56540aa68db49456c887, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.94
+      value: 3.05
       objectReference: {fileID: 0}
     - target: {fileID: 6832414983194888508, guid: 525c2cd1bcbf56540aa68db49456c887, type: 3}
       propertyPath: m_LocalPosition.z

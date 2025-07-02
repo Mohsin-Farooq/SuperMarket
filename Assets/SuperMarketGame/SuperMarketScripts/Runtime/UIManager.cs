@@ -33,11 +33,14 @@ public class UIManager : MonoBehaviour
     public void ShowLevelStartUI(int levelNumber, Action onComplete)
     {
         levelText.text = $"Level {levelNumber}";
-        SetCanvasGroupVisible(levelStartUIPanel, true, 1f);
-        StartCoroutine(FadeCanvasGroup(levelStartUIPanel, 1f, 0f, fadeDuration, delayBeforeFade, () =>
+        SetCanvasGroupVisible(levelStartUIPanel, true, 0f);
+        StartCoroutine(FadeCanvasGroup(levelStartUIPanel, 0f, 1f, fadeDuration, 0f, () =>
         {
-            levelStartUIPanel.gameObject.SetActive(false);
-            onComplete?.Invoke();
+            StartCoroutine(FadeCanvasGroup(levelStartUIPanel, 1f, 0f, fadeDuration, delayBeforeFade, () =>
+            {
+                levelStartUIPanel.gameObject.SetActive(false);
+                onComplete?.Invoke();
+            }));
         }));
     }
 

@@ -53,7 +53,7 @@ public class BillingQueueController : MonoBehaviour
         }
 
         isMoving = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
         ActivateScanner();
     }
     private IEnumerator MoveItemToRamp(GameObject item, Vector3 targetPosition)
@@ -87,8 +87,8 @@ public class BillingQueueController : MonoBehaviour
     {
         if (rampItems.Count > 0)
         {
-            BarCodeScanner.gameObject.SetActive(true);
-            CameraTrigger.instacne.TriggerCameraWhenScan();
+           
+            CameraTrigger.instacne.TriggerCameraWhenScan();    
             StartCoroutine(MoveItemToScanner(rampItems[0]));
         }
     }
@@ -97,7 +97,7 @@ public class BillingQueueController : MonoBehaviour
     {
         Vector3 startPosition = item.transform.position;
         float elapsedTime = 0f;
-
+       
         while (elapsedTime < itemMovingSpeed)
         {
             elapsedTime += Time.deltaTime;
@@ -107,6 +107,7 @@ public class BillingQueueController : MonoBehaviour
 
         item.transform.position = ScannedPosition.position;
         item.GetComponentInChildren<Item>().enabled = true;
+        BarCodeScanner.gameObject.SetActive(true);
     }
     //function to call when item scanned
     public void ProcessItemWithDelay()

@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private CartHandler GamelogicStart;
     public static LevelManager Instance;
     private int currentLevel = 1;
-
+    [SerializeField] private GameObject Cart;
     private void Awake()
     {
         if (Instance == null)
@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
 
     public void CompleteLevel()
     {
+        Cart.SetActive(false);
         currentLevel++;
         PlayerPrefs.SetInt("CurrentLevel", currentLevel);
         UIManager.Instance.ShowLevelCompleteUI(OnLevelContinueClicked);
