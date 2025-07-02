@@ -5,79 +5,162 @@ using UnityEngine.UI;
 
 public class CashCounter : MonoBehaviour
 {
-    [Header("UI Elements")]
-    [SerializeField] private Text amountDueText;    
-    [SerializeField] private Text enteredAmountText; 
-
+    public enum InputMode { Card, Cash }
     [Header("Settings")]
-    [SerializeField] private float amountDue = 100.00f; 
+    public InputMode currentMode = InputMode.Card;
 
-    private string enteredAmount = ""; 
+    [SerializeField] private Text amountDueText;
+    [SerializeField] private Text enteredAmountText;
+    [SerializeField] private float amountDue = 100f;
+
+    private string enteredText = "";
+    private float enteredAmount = 0f;
+    private bool isCompleted = false;
+
+  
+    private Stack<float> cashHistory = new Stack<float>();
+    private Stack<float> coinHistory = new Stack<float>();
 
     private void Start()
     {
-        UpdateDisplay();
+        UpdateAmountDueDisplay();
+        UpdateEnteredAmountDisplay();
     }
 
     private void OnEnable()
     {
-        CashCounterEvent.OnAmountUpdate += updateAmountdue;
+        CashCounterEvent.OnAmountUpdate += UpdateAmountDue;
     }
 
     private void OnDisable()
     {
-        CashCounterEvent.OnAmountUpdate -= updateAmountdue;
+        CashCounterEvent.OnAmountUpdate -= UpdateAmountDue;
     }
 
-    private void updateAmountdue(float amount)
+    private void UpdateAmountDue(float amount)
     {
         amountDue = amount;
+        UpdateAmountDueDisplay();
+    }
+
+    private void UpdateAmountDueDisplay()
+    {
         amountDueText.text = $"${amountDue}";
     }
 
-    private void UpdateDisplay()
+    private void UpdateEnteredAmountDisplay()
     {
-
-        enteredAmountText.text = enteredAmount.ToString();
+        enteredAmountText.text = $"${enteredAmount}";
     }
 
+    // ================= CARD MODE ===================
     public void OnKeyPress(string key)
     {
-        if (key == "." && enteredAmount.Contains(".")) return;
- 
-        enteredAmount += key;
-        UpdateDisplay();
+        if (currentMode != InputMode.Card || isCompleted) return;
+
+        if (key == "." && enteredText.Contains(".")) return;
+
+        enteredText += key;
+
+        if (float.TryParse(enteredText, out float result))
+            enteredAmount = result;
+
+        UpdateEnteredAmountDisplay();
     }
 
     public void OnBackspacePress()
     {
-        if (enteredAmount.Length > 0)
+        if (currentMode != InputMode.Card || isCompleted) return;
+
+        if (enteredText.Length > 0)
         {
-            enteredAmount = enteredAmount.Substring(0, enteredAmount.Length - 1);
-            UpdateDisplay();
+            enteredText = enteredText.Substring(0, enteredText.Length - 1);
+
+            if (float.TryParse(enteredText, out float result))
+                enteredAmount = result;
+            else
+                enteredAmount = 0f;
+
+            UpdateEnteredAmountDisplay();
         }
     }
 
-    private bool isCompleted=false;
+    // ================= CASH MODE ===================
+    public void OnCashNotePress(float noteValue)
+    {
+        if (currentMode != InputMode.Cash || isCompleted) return;
+       
+        enteredAmount += noteValue;
+        Debug.Log($"enter amount is {enteredAmount}");
+        cashHistory.Push(noteValue);  // Track cash addition
+        UpdateEnteredAmountDisplay();
+
+        CheckAutoComplete();
+    }
+
+    public void OnCoinPress(float coinValue)
+    {
+        if (currentMode != InputMode.Cash || isCompleted) return;
+
+        enteredAmount += coinValue;
+        coinHistory.Push(coinValue);  // Track coin addition
+        UpdateEnteredAmountDisplay();
+
+        CheckAutoComplete();
+    }
+
+    public void OnCashSubtract()
+    {
+        if (currentMode != InputMode.Cash || isCompleted) return;
+
+        if (cashHistory.Count > 0)
+        {
+            float lastCash = cashHistory.Pop();
+            enteredAmount -= lastCash;
+            UpdateEnteredAmountDisplay();
+        }
+    }
+
+    public void OnCoinSubtract()
+    {
+        if (currentMode != InputMode.Cash || isCompleted) return;
+
+        if (coinHistory.Count > 0)
+        {
+            float lastCoin = coinHistory.Pop();
+            enteredAmount -= lastCoin;
+            UpdateEnteredAmountDisplay();
+        }
+    }
+
+    private void CheckAutoComplete()
+    {
+        if (Mathf.Approximately(enteredAmount, amountDue))
+        {
+            OnConfirmPress();
+        }
+    }
+
+    // ================= CONFIRM CHECK ===================
     public void OnConfirmPress()
     {
         if (isCompleted) return;
 
-        if (float.TryParse(enteredAmount, out float enteredValue) && Mathf.Approximately(enteredValue, amountDue))
+        if (Mathf.Approximately(enteredAmount, amountDue))
         {
             PaymentSuccessful();
             isCompleted = true;
         }
         else
         {
-            Debug.Log("Incorrect Amount! Please try again.");
+            Debug.Log("Incorrect Amount! Try again.");
         }
     }
 
     private void PaymentSuccessful()
     {
+        Debug.Log("Payment Successful!");
         CameraTrigger.instacne.TriggerCameraWhenComplete();
         LevelManager.Instance.CompleteLevel();
     }
 }
-
