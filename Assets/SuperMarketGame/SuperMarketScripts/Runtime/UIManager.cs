@@ -43,14 +43,13 @@ public class UIManager : MonoBehaviour
 
     public void ShowLevelCompleteUI(Action onContinue)
     {
-        SetCanvasGroupVisible(levelCompleteUIPanel, true, 0f); // Start from 0 alpha
+        SetCanvasGroupVisible(levelCompleteUIPanel, true, 0f); 
 
         StartCoroutine(FadeCanvasGroup(levelCompleteUIPanel, 0f, 1f, fadeDuration, delayBeforeFade, () =>
         {
             continueButton.onClick.RemoveAllListeners();
             continueButton.onClick.AddListener(() =>
             {
-                // Fade out when user clicks "Continue"
                 StartCoroutine(FadeCanvasGroup(levelCompleteUIPanel, 1f, 0f, fadeDuration, 0f, () =>
                 {
                     levelCompleteUIPanel.gameObject.SetActive(false);
@@ -59,8 +58,6 @@ public class UIManager : MonoBehaviour
             });
         }));
     }
-
-    // Helper to instantly show/hide canvas group with specific alpha
     private void SetCanvasGroupVisible(CanvasGroup canvas, bool visible, float alpha)
     {
         canvas.gameObject.SetActive(visible);
@@ -69,7 +66,6 @@ public class UIManager : MonoBehaviour
         canvas.interactable = visible;
     }
 
-    // Universal coroutine for fading canvas groups
     private IEnumerator FadeCanvasGroup(CanvasGroup canvas, float from, float to, float duration, float delay, Action onComplete)
     {
         yield return new WaitForSeconds(delay);

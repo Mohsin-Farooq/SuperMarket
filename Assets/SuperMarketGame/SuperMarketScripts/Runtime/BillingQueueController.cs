@@ -139,4 +139,10 @@ public class BillingQueueController : MonoBehaviour
         Canvas.gameObject.SetActive(true);
         ButtonManager.gameObject.SetActive(true);
     }
+
+    public void DisableCnabas()
+    {
+        Canvas.gameObject.SetActive(false);
+        ButtonManager.gameObject.SetActive(false);
+    }
 }

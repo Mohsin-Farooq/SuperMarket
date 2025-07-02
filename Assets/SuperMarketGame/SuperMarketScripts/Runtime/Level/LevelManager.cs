@@ -42,12 +42,13 @@ public class LevelManager : MonoBehaviour
 
     private void OnLevelContinueClicked()
     {
+        CameraTrigger.instacne.TriggerCameraInitialPos();
         StartCoroutine(ReloadLevelSmoothly());
     }
 
     private IEnumerator ReloadLevelSmoothly()
     {
-        yield return new WaitForSeconds(0.5f); 
+        yield return new WaitForSeconds(0.7f); 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

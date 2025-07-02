@@ -58,12 +58,15 @@ public class CashCounter : MonoBehaviour
         }
     }
 
+    private bool isCompleted=false;
     public void OnConfirmPress()
     {
+        if (isCompleted) return;
+
         if (float.TryParse(enteredAmount, out float enteredValue) && Mathf.Approximately(enteredValue, amountDue))
         {
-            Debug.Log("Payment Successful!");
             PaymentSuccessful();
+            isCompleted = true;
         }
         else
         {
@@ -73,6 +76,7 @@ public class CashCounter : MonoBehaviour
 
     private void PaymentSuccessful()
     {
+        CameraTrigger.instacne.TriggerCameraWhenComplete();
         LevelManager.Instance.CompleteLevel();
     }
 }
