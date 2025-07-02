@@ -21,21 +21,16 @@ public class ScannerDrag : IDraggable
         mainCamera = camera;
         dragSmoothSpeed = smoothSpeed;
         coroutineRunner = coroutineHost;
-
         initialPosition = scannerTransform.position;
     }
 
     public void StartDrag(Vector3 inputPosition, int fingerId)
-    {
-        
-
+    {      
         if (isDragging) return;
 
         Ray ray = mainCamera.ScreenPointToRay(inputPosition);
         if (Physics.Raycast(ray, out RaycastHit hit) && hit.transform == scannerTransform)
-        {
-           
-            
+        {                      
             // Ray ray = mainCamera.ScreenPointToRay(inputPosition);
             // if (Physics.Raycast(ray, out RaycastHit hit))
             // {
@@ -72,19 +67,16 @@ public class ScannerDrag : IDraggable
 
             targetPosition.z = initialPosition.z; // Keep Z locked
             
-
             float lerpSpeed = Time.deltaTime * dragSmoothSpeed;
             scannerTransform.position = Vector3.Lerp(scannerTransform.position, targetPosition, lerpSpeed);
         }
     }
-
     public void EndDrag(int fingerId)
     {
         if (!isDragging || fingerId != activeFingerId) return;
 
         isDragging = false;
         activeFingerId = -1;
-
         snapBackCoroutine = coroutineRunner.StartCoroutine(SmoothSnapBack());
     }
 
@@ -102,8 +94,5 @@ public class ScannerDrag : IDraggable
         }
 
         scannerTransform.position = initialPosition;
-    }
-    
-    
-    
+    }  
 }

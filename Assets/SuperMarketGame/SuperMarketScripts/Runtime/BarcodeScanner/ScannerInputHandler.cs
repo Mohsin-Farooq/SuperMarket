@@ -9,7 +9,6 @@ public class ScannerInputHandler : ITouchInputHandler
     {
         this.dragHandler = dragHandler;
     }
-
     public void HandleInput()
     {
         if (Input.touchCount > 0)

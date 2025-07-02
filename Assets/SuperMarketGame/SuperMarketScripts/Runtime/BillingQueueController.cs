@@ -36,7 +36,6 @@ public class BillingQueueController : MonoBehaviour
             StartCoroutine(ProcessQueue());
         }
     }
-
     private IEnumerator ProcessQueue()
     {
         isMoving = true;
@@ -57,7 +56,6 @@ public class BillingQueueController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         ActivateScanner();
     }
-
     private IEnumerator MoveItemToRamp(GameObject item, Vector3 targetPosition)
     {
         Vector3 startPosition = item.transform.position;
@@ -85,8 +83,6 @@ public class BillingQueueController : MonoBehaviour
         }
         item.transform.position = targetPosition;
     }
-
-
     private void ActivateScanner()
     {
         if (rampItems.Count > 0)
@@ -113,8 +109,6 @@ public class BillingQueueController : MonoBehaviour
         item.GetComponentInChildren<Item>().enabled = true;
     }
     //function to call when item scanned
-
-
     public void ProcessItemWithDelay()
     {
         Invoke(nameof(ProcessScannedItem), 1f);
@@ -140,7 +134,6 @@ public class BillingQueueController : MonoBehaviour
             }
         }
     }
-
     private void EnableCanvas()
     {
         Canvas.gameObject.SetActive(true);

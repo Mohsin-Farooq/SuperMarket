@@ -73,8 +73,7 @@ public class CashCounter : MonoBehaviour
 
     private void PaymentSuccessful()
     {
-        enteredAmount = "";
-        UpdateDisplay();
+        LevelManager.Instance.CompleteLevel();
     }
 }
 
