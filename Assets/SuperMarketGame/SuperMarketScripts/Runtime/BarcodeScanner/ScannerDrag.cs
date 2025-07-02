@@ -27,7 +27,7 @@ public class ScannerDrag : IDraggable
 
     public void StartDrag(Vector3 inputPosition, int fingerId)
     {
-        coroutineRunner.enabled = true;
+        
 
         if (isDragging) return;
 

@@ -7,19 +7,23 @@ public class BarcodeDetector : IBarcodeDetector
     private  Transform scannerFace;
     private readonly LayerMask barcodeLayer;
     private readonly float detectionDistance;
-    
+    private readonly IDraggable draghandler;
 
     private HashSet<GameObject> DetectedObjects = new HashSet<GameObject>();
     private float totalAmountData = 0;
     private Vector3 ScannerStartpostion;
-    public BarcodeDetector(Transform scannerFace, LayerMask barcodeLayer, float detectionDistance)
+    public BarcodeDetector(Transform scannerFace, LayerMask barcodeLayer, float detectionDistance,IDraggable dragHandler)
     {
         this.scannerFace = scannerFace;
         this.barcodeLayer = barcodeLayer;
         this.detectionDistance = detectionDistance;
 
         ScannerStartpostion = scannerFace.position;
+
+        this.draghandler = dragHandler;
     }
+
+    
 
     public void DetectBarcodes()
     {
@@ -52,7 +56,7 @@ public class BarcodeDetector : IBarcodeDetector
 
     private void MethodsInvoker()
     {
-        ScannerController.ResetScannerPosition?.Invoke();
+        draghandler.EndDrag(0);
         Item.ItemPostionChange?.Invoke();
         BillingQueueController.instance.ProcessItemWithDelay();
 

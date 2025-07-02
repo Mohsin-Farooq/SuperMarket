@@ -18,29 +18,17 @@ public class ScannerController : MonoBehaviour
     private IDraggable draggable;
     private Vector3 startPosition;
 
-    public static Action ResetScannerPosition;
-
     private void Awake()
     {
         startPosition = transform.position;
     }
 
-    private void OnEnable()
-    {
-        ResetScannerPosition += ResetPosition;
-    }
-
-    private void OnDisable()
-    {
-        ResetScannerPosition -= ResetPosition;
-    }
 
     private void Start()
     {       
         draggable = new ScannerDrag(transform, Camera.main, dragSmoothSpeed, this);
-        barcodeDetector = new BarcodeDetector(scannerFace, barcodeLayer, detectionDistance);
-  
-        inputHandler = new ScannerInputHandler(draggable);       
+        inputHandler = new ScannerInputHandler(draggable);
+        barcodeDetector = new BarcodeDetector(scannerFace, barcodeLayer, detectionDistance, draggable);
     }
 
     private void Update()
@@ -50,54 +38,17 @@ public class ScannerController : MonoBehaviour
     }
 
 
-    private void ResetPosition()
-    {
-        StopAllCoroutines();
-        StartCoroutine(SmoothResetScannerPos());
-    }
-
-
-    private IEnumerator SmoothResetScannerPos()
-    {
-        
-        this.enabled = false;
-
-        float duration = 0.2f; 
-        float elapsed = 0f;
-
-        Vector3 initialPosition = transform.position;
-
-        while (elapsed < duration)
-        {
-            transform.position = Vector3.Lerp(initialPosition, startPosition, elapsed / duration);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = startPosition;
-        this.enabled = true;
-    }
-
-
-
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (scannerFace != null)
         {
           
-            Gizmos.color = Color.red;
-
-            
-            Vector3 rayDirection = scannerFace.forward * detectionDistance;
-
-           
-            Gizmos.DrawLine(scannerFace.position, scannerFace.position + rayDirection);
-
-            
+            Gizmos.color = Color.red;         
+            Vector3 rayDirection = scannerFace.forward * detectionDistance;    
+            Gizmos.DrawLine(scannerFace.position, scannerFace.position + rayDirection);        
             if (Physics.Raycast(scannerFace.position, scannerFace.forward, out RaycastHit hit, detectionDistance, barcodeLayer))
-            {
-              
+            {         
                 Gizmos.color = Color.green;
                 Gizmos.DrawSphere(hit.point, 0.1f);
             }
