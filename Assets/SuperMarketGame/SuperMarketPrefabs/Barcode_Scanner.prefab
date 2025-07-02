@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.03, z: -10.64}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3703270394704890988}
@@ -49,7 +49,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragSmoothSpeed: 15
-  fixedZ: 0
   scannerFace: {fileID: 2592924247631122037}
   barcodeLayer:
     serializedVersion: 2
@@ -219,7 +218,7 @@ Transform:
   m_GameObject: {fileID: 7293761637898556161}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.112}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -234,13 +233,13 @@ Light:
   m_GameObject: {fileID: 7293761637898556161}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 0
+  m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.9056604, g: 0.67619646, b: 0.23495908, a: 1}
-  m_Intensity: 28.8
-  m_Range: 0.85
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_Color: {r: 0.9528302, g: 0.12401071, b: 0, a: 1}
+  m_Intensity: 34.54
+  m_Range: 0.49
+  m_SpotAngle: 18.1
+  m_InnerSpotAngle: 8.145508
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
