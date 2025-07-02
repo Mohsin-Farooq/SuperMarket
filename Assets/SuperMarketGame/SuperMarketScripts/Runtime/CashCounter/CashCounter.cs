@@ -32,7 +32,7 @@ public class CashCounter : MonoBehaviour
     private void updateAmountdue(float amount)
     {
         amountDue = amount;
-        amountDueText.text = $"$:{amountDue}";
+        amountDueText.text = $"${amountDue}";
     }
 
     private void UpdateDisplay()
