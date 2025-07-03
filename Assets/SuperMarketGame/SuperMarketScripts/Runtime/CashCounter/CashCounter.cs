@@ -50,7 +50,7 @@ public class CashCounter : MonoBehaviour
 
     private void UpdateEnteredAmountDisplay()
     {
-        enteredAmountText.text = $"${enteredAmount}";
+        enteredAmountText.text = $"{enteredAmount}";
     }
 
     // ================= CARD MODE ===================
