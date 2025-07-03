@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Cookies
   m_EditorClassIdentifier: 
   ItemName: Cookies
-  price: 50
+  price: 10.5

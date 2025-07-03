@@ -12,12 +12,14 @@ public class CashCounter : MonoBehaviour
     [SerializeField] private Text amountDueText;
     [SerializeField] private Text enteredAmountText;
     [SerializeField] private float amountDue = 100f;
+    [SerializeField] private float MaxCashStackLimit = 10;
+    [SerializeField] private float MaxCoinStackLimit = 10f;
 
     private string enteredText = "";
     private float enteredAmount = 0f;
     private bool isCompleted = false;
 
-  
+
     private Stack<float> cashHistory = new Stack<float>();
     private Stack<float> coinHistory = new Stack<float>();
 
@@ -50,7 +52,10 @@ public class CashCounter : MonoBehaviour
 
     private void UpdateEnteredAmountDisplay()
     {
+        enteredAmount = Mathf.Round(enteredAmount * 100f) / 100f;
         enteredAmountText.text = $"{enteredAmount}";
+        if(currentMode == InputMode.Card)
+        enteredAmountText.text = enteredText;
     }
 
     // ================= CARD MODE ===================
@@ -90,26 +95,36 @@ public class CashCounter : MonoBehaviour
     public void OnCashNotePress(float noteValue)
     {
         if (currentMode != InputMode.Cash || isCompleted) return;
-        AudioManager._instance.PlaySound("Cash");
-        enteredAmount += noteValue;
-        Debug.Log($"enter amount is {enteredAmount}");
-        cashHistory.Push(noteValue);  // Track cash addition
-        UpdateEnteredAmountDisplay();
 
-        CheckAutoComplete();
+        if (cashHistory.Count <= MaxCashStackLimit)
+        {
+            AudioManager._instance.PlaySound("Cash");
+            enteredAmount += noteValue;
+           
+         
+            cashHistory.Push(noteValue);  // Track cash addition
+
+
+            UpdateEnteredAmountDisplay();
+
+            CheckAutoComplete();
+        }
     }
 
     public void OnCoinPress(float coinValue)
     {
         if (currentMode != InputMode.Cash || isCompleted) return;
-        AudioManager._instance.PlaySound("Coin");
-        enteredAmount += coinValue;
-        coinHistory.Push(coinValue);  // Track coin addition
-        UpdateEnteredAmountDisplay();
 
-        CheckAutoComplete();
+        if (coinHistory.Count <= MaxCoinStackLimit)
+        {
+            AudioManager._instance.PlaySound("Coin");
+            enteredAmount += coinValue;
+            coinHistory.Push(coinValue);  // Track coin addition
+            UpdateEnteredAmountDisplay();
+
+            CheckAutoComplete();
+        }
     }
-
     public void OnCashSubtract()
     {
         if (currentMode != InputMode.Cash || isCompleted) return;
@@ -162,7 +177,7 @@ public class CashCounter : MonoBehaviour
 
     private void PaymentSuccessful()
     {
-        Debug.Log("Payment Successful!");
+
         CameraTrigger.instacne.TriggerCameraWhenComplete();
         LevelManager.Instance.CompleteLevel();
     }

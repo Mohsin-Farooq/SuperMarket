@@ -38,8 +38,7 @@ public class ButtonConfig : MonoBehaviour
                 counter.OnConfirmPress();
                 break;
 
-            case ButtonType.CashNote:
-                Debug.Log("pressed");
+            case ButtonType.CashNote:            
                 counter.OnCashNotePress(cashValue);
                 break;
 

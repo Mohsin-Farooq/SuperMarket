@@ -49,7 +49,6 @@ public class BarcodeDetector : IBarcodeDetector
         {
             totalAmountData += item.Price;
             CashCounterEvent.OnAmountUpdate?.Invoke(totalAmountData);
-            Debug.Log($"Scanned Item: {item.ItemName}, Price: ${item.Price}");
         }
         else
         {
