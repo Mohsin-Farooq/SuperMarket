@@ -1,3 +1,4 @@
+using MoreMountains.NiceVibrations;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,15 +36,19 @@ public class LevelManager : MonoBehaviour
 
     public void CompleteLevel()
     {
+       
         Cart.SetActive(false);
         currentLevel++;
         PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+        AudioManager._instance.PlaySound("Complete");
+       ;
         UIManager.Instance.ShowLevelCompleteUI(OnLevelContinueClicked);
     }
 
     private void OnLevelContinueClicked()
     {
         CameraTrigger.instacne.TriggerCameraInitialPos();
+        MMVibrationManager.Haptic(HapticTypes.LightImpact);
         StartCoroutine(ReloadLevelSmoothly());
     }
 

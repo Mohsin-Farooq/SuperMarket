@@ -34,6 +34,7 @@ public class ButtonConfig : MonoBehaviour
                 break;
 
             case ButtonType.Confirm:
+                AudioManager._instance.PlaySound("Button");
                 counter.OnConfirmPress();
                 break;
 

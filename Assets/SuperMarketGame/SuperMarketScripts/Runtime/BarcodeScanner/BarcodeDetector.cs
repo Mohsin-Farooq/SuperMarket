@@ -1,3 +1,4 @@
+using MoreMountains.NiceVibrations;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,8 @@ public class BarcodeDetector : IBarcodeDetector
         {
             if (!DetectedObjects.Contains(hit.collider.gameObject))
             {
+                AudioManager._instance.PlaySound("Scan");
+                MMVibrationManager.Haptic(HapticTypes.LightImpact);
                 DetectedObjects.Add(hit.collider.gameObject);
                 OnBarcodeDetected(hit.collider.gameObject);
                 MethodsInvoker();

@@ -1,3 +1,4 @@
+using MoreMountains.NiceVibrations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class ButtonManager : MonoBehaviour
                 ButtonConfig buttonConfig = hit.collider.GetComponent<ButtonConfig>();
                 if (buttonConfig != null)
                 {
+                    MMVibrationManager.Haptic(HapticTypes.LightImpact);
                     buttonConfig.TriggerAction();
                 }
                 else

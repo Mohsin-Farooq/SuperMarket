@@ -61,6 +61,7 @@ public class CashCounter : MonoBehaviour
         if (key == "." && enteredText.Contains(".")) return;
 
         enteredText += key;
+        AudioManager._instance.PlaySound("Button");
 
         if (float.TryParse(enteredText, out float result))
             enteredAmount = result;
@@ -75,7 +76,7 @@ public class CashCounter : MonoBehaviour
         if (enteredText.Length > 0)
         {
             enteredText = enteredText.Substring(0, enteredText.Length - 1);
-
+            AudioManager._instance.PlaySound("Button");
             if (float.TryParse(enteredText, out float result))
                 enteredAmount = result;
             else
@@ -89,7 +90,7 @@ public class CashCounter : MonoBehaviour
     public void OnCashNotePress(float noteValue)
     {
         if (currentMode != InputMode.Cash || isCompleted) return;
-       
+        AudioManager._instance.PlaySound("Cash");
         enteredAmount += noteValue;
         Debug.Log($"enter amount is {enteredAmount}");
         cashHistory.Push(noteValue);  // Track cash addition
@@ -101,7 +102,7 @@ public class CashCounter : MonoBehaviour
     public void OnCoinPress(float coinValue)
     {
         if (currentMode != InputMode.Cash || isCompleted) return;
-
+        AudioManager._instance.PlaySound("Coin");
         enteredAmount += coinValue;
         coinHistory.Push(coinValue);  // Track coin addition
         UpdateEnteredAmountDisplay();
@@ -115,6 +116,7 @@ public class CashCounter : MonoBehaviour
 
         if (cashHistory.Count > 0)
         {
+            AudioManager._instance.PlaySound("Cash");
             float lastCash = cashHistory.Pop();
             enteredAmount -= lastCash;
             UpdateEnteredAmountDisplay();
@@ -127,6 +129,7 @@ public class CashCounter : MonoBehaviour
 
         if (coinHistory.Count > 0)
         {
+            AudioManager._instance.PlaySound("Coin");
             float lastCoin = coinHistory.Pop();
             enteredAmount -= lastCoin;
             UpdateEnteredAmountDisplay();
