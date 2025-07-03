@@ -15,6 +15,8 @@ public class CashCounter : MonoBehaviour
     [SerializeField] private float MaxCashStackLimit = 10;
     [SerializeField] private float MaxCoinStackLimit = 10f;
 
+    [SerializeField] private GameObject SubCoinStack, SubCashStack; 
+
     private string enteredText = "";
     private float enteredAmount = 0f;
     private bool isCompleted = false;
@@ -54,7 +56,9 @@ public class CashCounter : MonoBehaviour
     {
         enteredAmount = Mathf.Round(enteredAmount * 100f) / 100f;
         enteredAmountText.text = $"{enteredAmount}";
-        if(currentMode == InputMode.Card)
+
+
+        if(currentMode == InputMode.Card) // TO SHOW "." ON THE DISPLAY
         enteredAmountText.text = enteredText;
     }
 
@@ -98,12 +102,14 @@ public class CashCounter : MonoBehaviour
 
         if (cashHistory.Count <= MaxCashStackLimit)
         {
+
             AudioManager._instance.PlaySound("Cash");
             enteredAmount += noteValue;
            
          
             cashHistory.Push(noteValue);  // Track cash addition
-
+            
+            SubCashStack.SetActive(true);
 
             UpdateEnteredAmountDisplay();
 
@@ -120,6 +126,9 @@ public class CashCounter : MonoBehaviour
             AudioManager._instance.PlaySound("Coin");
             enteredAmount += coinValue;
             coinHistory.Push(coinValue);  // Track coin addition
+            
+            SubCoinStack.SetActive(true);
+            
             UpdateEnteredAmountDisplay();
 
             CheckAutoComplete();
@@ -135,7 +144,13 @@ public class CashCounter : MonoBehaviour
             float lastCash = cashHistory.Pop();
             enteredAmount -= lastCash;
             UpdateEnteredAmountDisplay();
+         
+            if (cashHistory.Count == 0)
+            {
+                SubCashStack.SetActive(false);
+            }
         }
+      
     }
 
     public void OnCoinSubtract()
@@ -148,7 +163,13 @@ public class CashCounter : MonoBehaviour
             float lastCoin = coinHistory.Pop();
             enteredAmount -= lastCoin;
             UpdateEnteredAmountDisplay();
+
+            if (coinHistory.Count == 0)
+            {
+                SubCoinStack.SetActive(false);
+            }
         }
+       
     }
 
     private void CheckAutoComplete()
