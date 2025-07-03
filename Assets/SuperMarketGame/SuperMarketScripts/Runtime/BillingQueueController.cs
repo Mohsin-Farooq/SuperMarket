@@ -17,6 +17,7 @@ public class BillingQueueController : MonoBehaviour
     private bool isMoving = false;
 
     [SerializeField] private GameObject BarCodeScanner,Canvas,ButtonManager,ScanPannel,InfoText;
+    [SerializeField] private GameObject[] CashierMachine;
     public static BillingQueueController instance;
 
     private void Awake()
@@ -143,7 +144,7 @@ public class BillingQueueController : MonoBehaviour
     }
     private void EnableCanvas()
     {
-      
+        CashierMachine[UnityEngine.Random.Range(0, 2)].gameObject.SetActive(false); 
         Canvas.gameObject.SetActive(true);
         ButtonManager.gameObject.SetActive(true);
     }

@@ -8,9 +8,9 @@ public class ButtonConfig : MonoBehaviour
     [SerializeField] private ButtonType buttonType;
 
     [Header("For Key / Cash / Coin Buttons")]
-    [SerializeField] private string key;            // For number keys like "1", "2", etc (For Card Mode)
-    [SerializeField] private float cashValue;       // For Cash note buttons (e.g., 5, 10, 20)
-    [SerializeField] private float coinValue;       // For Coin buttons (e.g., 1, 2, etc)
+    [SerializeField] private string key;            
+    [SerializeField] private float cashValue;       
+    [SerializeField] private float coinValue;   
 
     [Header("Reference")]
     [SerializeField] private CashCounter counter;

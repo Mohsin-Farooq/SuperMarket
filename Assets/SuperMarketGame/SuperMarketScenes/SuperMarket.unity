@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44402185, g: 0.49316472, b: 0.57223153, a: 1}
+  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1228,7 +1228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &400104978
 Transform:
   m_ObjectHideFlags: 0
@@ -2358,7 +2358,7 @@ Transform:
   m_GameObject: {fileID: 816690794}
   serializedVersion: 2
   m_LocalRotation: {x: 0.26355034, y: -0.6561564, z: 0.26355034, w: 0.6561564}
-  m_LocalPosition: {x: -11.970674, y: 9.522467, z: -9.895155}
+  m_LocalPosition: {x: -11.69, y: 9.522467, z: -9.895155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3563,7 +3563,7 @@ Transform:
   m_GameObject: {fileID: 1222207408}
   serializedVersion: 2
   m_LocalRotation: {x: 0.14807737, y: -0.69142836, z: 0.14807737, w: 0.69142836}
-  m_LocalPosition: {x: -11.970674, y: 9.522467, z: -9.895155}
+  m_LocalPosition: {x: -11.69, y: 9.522467, z: -9.895155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4885,6 +4885,9 @@ MonoBehaviour:
   ButtonManager: {fileID: 179211692}
   ScanPannel: {fileID: 1824798510}
   InfoText: {fileID: 1721913949}
+  CashierMachine:
+  - {fileID: 400104977}
+  - {fileID: 1175505798994097881}
 --- !u!4 &1693889277
 Transform:
   m_ObjectHideFlags: 0
@@ -4894,7 +4897,7 @@ Transform:
   m_GameObject: {fileID: 1693889275}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -693.253, y: -925.43475, z: 18.274918}
+  m_LocalPosition: {x: -693.253, y: -925.43475, z: 18.27492}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

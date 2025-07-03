@@ -9,12 +9,10 @@ public class ItemRotater : MonoBehaviour, IRotatable
     {
         touchInputHandler = new ItemTouchInputHandler(this,transform);
     }
-
     private void Update()
     {
         touchInputHandler.HandleInput();
     }
-
     public void Rotate(Vector2 delta)
     {
         float rotationX = delta.y * RoationSpeed;

@@ -18,7 +18,6 @@ public class UIManager : MonoBehaviour
     [Header("Fade Settings")]
     [SerializeField] private float fadeDuration = 1.5f;
     [SerializeField] private float delayBeforeFade = 1f;
-
     private void Awake()
     {
         if (Instance == null)
@@ -29,7 +28,6 @@ public class UIManager : MonoBehaviour
             return;
         }
     }
-
     public void ShowLevelStartUI(int levelNumber, Action onComplete)
     {
         levelText.text = $"Level {levelNumber}";
@@ -43,7 +41,6 @@ public class UIManager : MonoBehaviour
             }));
         }));
     }
-
     public void ShowLevelCompleteUI(Action onContinue)
     {
         SetCanvasGroupVisible(levelCompleteUIPanel, true, 0f); 
