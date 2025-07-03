@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
         currentLevel++;
         PlayerPrefs.SetInt("CurrentLevel", currentLevel);
         AudioManager._instance.PlaySound("Complete");
-       ;
+       
         UIManager.Instance.ShowLevelCompleteUI(OnLevelContinueClicked);
     }
 

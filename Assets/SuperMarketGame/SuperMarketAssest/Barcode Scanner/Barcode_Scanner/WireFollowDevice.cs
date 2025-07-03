@@ -36,7 +36,7 @@ public class WireFollowDevice : MonoBehaviour
             if (direction != Vector3.zero)
                 wireMesh.rotation = Quaternion.FromToRotation(Vector3.up, direction);
 
-            // Scale mesh along its Y axis
+            //  Scale mesh along its Y axis
             wireMesh.localScale = new Vector3(
                 wireMesh.localScale.x,
                 length,

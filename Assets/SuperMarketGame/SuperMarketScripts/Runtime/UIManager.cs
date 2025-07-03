@@ -43,11 +43,14 @@ public class UIManager : MonoBehaviour
     }
     public void ShowLevelCompleteUI(Action onContinue)
     {
+       
         SetCanvasGroupVisible(levelCompleteUIPanel, true, 0f); 
 
         StartCoroutine(FadeCanvasGroup(levelCompleteUIPanel, 0f, 1f, fadeDuration, delayBeforeFade, () =>
         {
+            continueButton.interactable = true;
             continueButton.onClick.RemoveAllListeners();
+           
             continueButton.onClick.AddListener(() =>
             {
                 StartCoroutine(FadeCanvasGroup(levelCompleteUIPanel, 1f, 0f, fadeDuration, 0f, () =>
