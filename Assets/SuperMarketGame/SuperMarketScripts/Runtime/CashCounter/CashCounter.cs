@@ -13,7 +13,7 @@ public class CashCounter : MonoBehaviour
     [SerializeField] private Text enteredAmountText;
     [SerializeField] private float amountDue = 100f;
     [SerializeField] private float MaxCashStackLimit = 10;
-    [SerializeField] private float MaxCoinStackLimit = 10f;
+    [SerializeField] private float MaxCoinStackLimit = 25f;
 
     [SerializeField] private GameObject SubCoinStack, SubCashStack; 
 

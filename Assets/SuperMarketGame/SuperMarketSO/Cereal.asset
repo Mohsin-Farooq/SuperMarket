@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d91819642374584783059628ee44e98, type: 3}
-  m_Name: Cookies
+  m_Name: Cereal
   m_EditorClassIdentifier: 
-  ItemName: Cookies
-  price: 10.5
+  ItemName: Cereal
+  price: 2
