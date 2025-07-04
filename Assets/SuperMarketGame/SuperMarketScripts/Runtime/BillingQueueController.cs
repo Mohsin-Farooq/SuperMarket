@@ -117,7 +117,7 @@ public class BillingQueueController : MonoBehaviour
     //function to call when item scanned
     public void ProcessItemWithDelay()
     {
-        Invoke(nameof(ProcessScannedItem), 1f);
+        Invoke(nameof(ProcessScannedItem), 0.3f);
     }
 
     private void ProcessScannedItem()
