@@ -9,11 +9,7 @@ public class Item : MonoBehaviour
     public ItemSO itemData; 
     public float Price => itemData != null ? itemData.price : 0.0f;
     public string ItemName => itemData != null ? itemData.ItemName : "Unknown Item";
-
     public static Action ItemPostionChange;
-
-    
-    
     private void OnEnable()
     {
         ItemPostionChange += ItemPosDelay;
@@ -42,7 +38,7 @@ public class Item : MonoBehaviour
         float elapsed = 0f;
 
         Vector3 initialPosition = transform.parent.position;
-        Vector3 targetPosition = initialPosition + transform.parent.right * 10.0f;
+        Vector3 targetPosition = initialPosition + Vector3.right * 10.0f;
         while (elapsed < duration)
         {
             transform.parent.position = Vector3.Lerp(initialPosition, targetPosition, elapsed / duration);
