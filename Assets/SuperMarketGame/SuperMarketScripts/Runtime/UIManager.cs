@@ -13,7 +13,6 @@ public class UIManager : MonoBehaviour
 
     [Header("Level Complete UI")]
     [SerializeField] private CanvasGroup levelCompleteUIPanel;
-    [SerializeField] private Button continueButton;
 
     [Header("Fade Settings")]
     [SerializeField] private float fadeDuration = 1.5f;
@@ -48,17 +47,11 @@ public class UIManager : MonoBehaviour
 
         StartCoroutine(FadeCanvasGroup(levelCompleteUIPanel, 0f, 1f, fadeDuration, delayBeforeFade, () =>
         {
-            continueButton.interactable = true;
-            continueButton.onClick.RemoveAllListeners();
-           
-            continueButton.onClick.AddListener(() =>
-            {
-                StartCoroutine(FadeCanvasGroup(levelCompleteUIPanel, 1f, 0f, fadeDuration, 0f, () =>
-                {
-                    levelCompleteUIPanel.gameObject.SetActive(false);
+            StartCoroutine(FadeCanvasGroup(levelCompleteUIPanel, 1f, 0f, fadeDuration, delayBeforeFade, () =>
+                {           
                     onContinue?.Invoke();
+                  
                 }));
-            });
         }));
     }
     private void SetCanvasGroupVisible(CanvasGroup canvas, bool visible, float alpha)
