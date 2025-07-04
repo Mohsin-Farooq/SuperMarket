@@ -2743,8 +2743,8 @@ MonoBehaviour:
   levelStartUIPanel: {fileID: 1851655104}
   levelText: {fileID: 1388055088}
   levelCompleteUIPanel: {fileID: 127240917}
-  fadeDuration: 1.5
-  delayBeforeFade: 1
+  fadeDuration: 0.8
+  delayBeforeFade: 0.5
 --- !u!4 &633512616
 Transform:
   m_ObjectHideFlags: 0
