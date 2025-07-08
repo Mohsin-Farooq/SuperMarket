@@ -2000,7 +2000,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 482733445}
-  - component: {fileID: 482733447}
+  - component: {fileID: 482733446}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -2025,7 +2025,7 @@ Transform:
   - {fileID: 1069620162}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &482733447
+--- !u!114 &482733446
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2034,18 +2034,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 482733444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26c502e6b0f5f454ab94d3fc2bcd83a6, type: 3}
+  m_Script: {fileID: 11500000, guid: a58773ab555f69e469e2b06ebadde569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   musicSource: {fileID: 771841193}
   SoundSource: {fileID: 1069620161}
   bgMusicClip: {fileID: 8300000, guid: 0d7a179cf1097a946b64ae459bebcff8, type: 3}
   audioClips:
-  - {fileID: 8300000, guid: fca9de758d0e4ac489d18a97fc93f040, type: 3}
   - {fileID: 8300000, guid: 534ca75a3b60f3b4cafd0df8c1dd4e09, type: 3}
   - {fileID: 8300000, guid: b6978a099e4f6fa4db7a8705aa0e1651, type: 3}
   - {fileID: 8300000, guid: c113a75e41df66c4894a2a3ba242d6b1, type: 3}
   - {fileID: 8300000, guid: d35af11163bc39848a19a0b834151b05, type: 3}
+  - {fileID: 8300000, guid: fca9de758d0e4ac489d18a97fc93f040, type: 3}
 --- !u!1 &508541240
 GameObject:
   m_ObjectHideFlags: 0
