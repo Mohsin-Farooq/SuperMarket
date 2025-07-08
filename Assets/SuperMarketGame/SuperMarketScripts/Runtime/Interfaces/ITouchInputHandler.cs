@@ -1,4 +1,7 @@
-public interface ITouchInputHandler
+namespace SuperMarketGame
 {
-    void HandleInput();
+    public interface ITouchInputHandler
+    {
+        void HandleInput();
+    }
 }

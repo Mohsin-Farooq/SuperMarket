@@ -1,29 +1,30 @@
 using MoreMountains.NiceVibrations;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonManager : MonoBehaviour
+namespace SuperMarketGame
 {
-     [SerializeField]private LayerMask buttonLayer;
-
-    private void Update()
+    public class ButtonManager : MonoBehaviour
     {
-        if (Input.GetMouseButtonDown(0)) 
+        [SerializeField] private LayerMask buttonLayer;
+
+        private void Update()
         {
-            
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, buttonLayer))
+            if (Input.GetMouseButtonDown(0))
             {
-                ButtonConfig buttonConfig = hit.collider.GetComponent<ButtonConfig>();
-                if (buttonConfig != null)
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, buttonLayer))
                 {
-                    MMVibrationManager.Haptic(HapticTypes.LightImpact);
-                    buttonConfig.TriggerAction();
-                }
-                else
-                {
-                    Debug.LogWarning($"No ButtonConfig found on {hit.collider.gameObject.name}");
+                    ButtonConfig buttonConfig = hit.collider.GetComponent<ButtonConfig>();
+                    if (buttonConfig != null)
+                    {
+                        MMVibrationManager.Haptic(HapticTypes.LightImpact);
+                        buttonConfig.TriggerAction();
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"No ButtonConfig found on {hit.collider.gameObject.name}");
+                    }
                 }
             }
         }

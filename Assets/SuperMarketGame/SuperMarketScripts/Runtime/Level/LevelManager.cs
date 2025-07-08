@@ -3,58 +3,61 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour
+namespace SuperMarketGame
 {
-
-    [SerializeField] private CartHandler GamelogicStart;
-    public static LevelManager Instance;
-    private int currentLevel = 1;
-    [SerializeField] private GameObject Cart;
-    private void Awake()
+    public class LevelManager : MonoBehaviour
     {
-        if (Instance == null)
+
+        [SerializeField] private CartHandler GamelogicStart;
+        public static LevelManager Instance;
+        private int currentLevel = 1;
+        [SerializeField] private GameObject Cart;
+        private void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
         }
-        else
+
+        private void Start()
         {
-            Destroy(gameObject);
-            return;
+            currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
+            UIManager.Instance.ShowLevelStartUI(currentLevel, OnLevelIntroComplete);
         }
-    }
 
-    private void Start()
-    {
-        currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
-        UIManager.Instance.ShowLevelStartUI(currentLevel, OnLevelIntroComplete);
-    }
+        private void OnLevelIntroComplete()
+        {
+            GamelogicStart.enabled = true;
+        }
 
-    private void OnLevelIntroComplete()
-    {
-        GamelogicStart.enabled = true;
-    }
+        public void CompleteLevel()
+        {
 
-    public void CompleteLevel()
-    {
-       
-        Cart.SetActive(false);
-        currentLevel++;
-        PlayerPrefs.SetInt("CurrentLevel", currentLevel);
-        AudioManager._instance.PlaySound("Complete");
-       
-        UIManager.Instance.ShowLevelCompleteUI(OnLevelContinueClicked);
-    }
+            Cart.SetActive(false);
+            currentLevel++;
+            PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+            AudioManager._instance.PlaySound("Complete");
 
-    private void OnLevelContinueClicked()
-    {
-        CameraTrigger.instacne.TriggerCameraInitialPos();
-        MMVibrationManager.Haptic(HapticTypes.LightImpact);
-        StartCoroutine(ReloadLevelSmoothly());
-    }
+            UIManager.Instance.ShowLevelCompleteUI(OnLevelContinueClicked);
+        }
 
-    private IEnumerator ReloadLevelSmoothly()
-    {
-        yield return new WaitForSeconds(1.2f); 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        private void OnLevelContinueClicked()
+        {
+            CameraTrigger.instacne.TriggerCameraInitialPos();
+            MMVibrationManager.Haptic(HapticTypes.LightImpact);
+            StartCoroutine(ReloadLevelSmoothly());
+        }
+
+        private IEnumerator ReloadLevelSmoothly()
+        {
+            yield return new WaitForSeconds(1.2f);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }

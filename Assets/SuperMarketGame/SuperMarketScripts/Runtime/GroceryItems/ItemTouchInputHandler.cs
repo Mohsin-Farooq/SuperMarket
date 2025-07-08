@@ -1,56 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemTouchInputHandler : ITouchInputHandler
+namespace SuperMarketGame
 {
-    private readonly IRotatable rotatableObject;
-    private readonly Transform objectTransform;
-    private Vector2 previousTouchPosition;
-    private bool isRotating;
-    private Camera mainCamera;
-   
-    public ItemTouchInputHandler(IRotatable rotatable, Transform objectTransform)
+    public class ItemTouchInputHandler : ITouchInputHandler
     {
-        rotatableObject = rotatable;
-        this.objectTransform = objectTransform;
-        mainCamera = Camera.main;
-    }
+        private readonly IRotatable rotatableObject;
+        private readonly Transform objectTransform;
+        private Vector2 previousTouchPosition;
+        private bool isRotating;
+        private Camera mainCamera;
 
-    public void HandleInput()
-    {
-        if (Input.touchCount == 1)
+        public ItemTouchInputHandler(IRotatable rotatable, Transform objectTransform)
         {
-            Touch touch = Input.GetTouch(0);
+            rotatableObject = rotatable;
+            this.objectTransform = objectTransform;
+            mainCamera = Camera.main;
+        }
 
-            if (touch.phase == TouchPhase.Began)
+        public void HandleInput()
+        {
+            if (Input.touchCount == 1)
             {
-                if (IsTouchingObject(touch.position))
+                Touch touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Began)
                 {
+                    if (IsTouchingObject(touch.position))
+                    {
+                        previousTouchPosition = touch.position;
+                        isRotating = true;
+                    }
+                }
+                else if (touch.phase == TouchPhase.Moved && isRotating)
+                {
+                    Vector2 delta = touch.position - previousTouchPosition;
+                    rotatableObject.Rotate(delta);
                     previousTouchPosition = touch.position;
-                    isRotating = true;
+                }
+                else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+                {
+                    isRotating = false;
                 }
             }
-            else if (touch.phase == TouchPhase.Moved && isRotating)
-            {
-                Vector2 delta = touch.position - previousTouchPosition;
-                rotatableObject.Rotate(delta);
-                previousTouchPosition = touch.position;
-            }
-            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
-            {
-                isRotating = false;
-            }
         }
-    }
 
-    private bool IsTouchingObject(Vector2 inputPosition)
-    {
-        Ray ray = mainCamera.ScreenPointToRay(inputPosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        private bool IsTouchingObject(Vector2 inputPosition)
         {
-            return hit.transform == objectTransform;
+            Ray ray = mainCamera.ScreenPointToRay(inputPosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                return hit.transform == objectTransform;
+            }
+            return false;
         }
-        return false;
     }
 }

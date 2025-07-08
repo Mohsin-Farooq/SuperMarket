@@ -1,43 +1,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemManager : MonoBehaviour
+namespace SuperMarketGame
 {
-    [SerializeField] private List<GameObject> itemPrefabs;
-    [SerializeField] private List<Transform> cartPositions;
-    [SerializeField] private BillingQueueController queueController;
-    [SerializeField] private int numberOfItemsToSpawn = 6;
-
-    public void InstantiateRandomItems()
+    public class ItemManager : MonoBehaviour
     {
-        if (itemPrefabs == null || itemPrefabs.Count == 0 || cartPositions == null || cartPositions.Count == 0)
+        [SerializeField] private List<GameObject> itemPrefabs;
+        [SerializeField] private List<Transform> cartPositions;
+        [SerializeField] private BillingQueueController queueController;
+        [SerializeField] private int numberOfItemsToSpawn = 6;
+
+        public void InstantiateRandomItems()
         {
-            Debug.LogWarning("Missing item prefabs or spawn positions!");
-            return;
+            if (itemPrefabs == null || itemPrefabs.Count == 0 || cartPositions == null || cartPositions.Count == 0)
+            {
+                Debug.LogWarning("Missing item prefabs or spawn positions!");
+                return;
+            }
+
+            int spawnCount = Random.Range(1, Mathf.Max(8, cartPositions.Count + 1));
+            List<Transform> availableSpots = new List<Transform>(cartPositions);
+
+            for (int i = 0; i < spawnCount; i++)
+            {
+                GameObject randomPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Count)];
+                int randomIndex = Random.Range(0, availableSpots.Count);
+
+                Transform randomSpawn = availableSpots[randomIndex];
+                availableSpots.RemoveAt(randomIndex);
+
+
+                GameObject newItem = Instantiate(randomPrefab, randomSpawn.position, randomPrefab.transform.rotation);
+                newItem.transform.SetParent(randomSpawn);
+
+                queueController.AddItemToQueue(newItem);
+            }
         }
 
-        int spawnCount = Random.Range(1, Mathf.Max(8, cartPositions.Count + 1));
-        List<Transform> availableSpots = new List<Transform>(cartPositions);
 
-        for (int i = 0; i < spawnCount; i++)
+        private void Start()
         {
-            GameObject randomPrefab = itemPrefabs[Random.Range(0, itemPrefabs.Count)];
-            int randomIndex = Random.Range(0, availableSpots.Count);
-
-            Transform randomSpawn = availableSpots[randomIndex];
-            availableSpots.RemoveAt(randomIndex); 
-
-        
-            GameObject newItem = Instantiate(randomPrefab, randomSpawn.position, randomPrefab.transform.rotation);
-            newItem.transform.SetParent(randomSpawn);
-
-            queueController.AddItemToQueue(newItem);
+            InstantiateRandomItems();
         }
-    }
-
-
-    private void Start()
-    {
-        InstantiateRandomItems();
     }
 }

@@ -1,7 +1,9 @@
-
 using UnityEngine;
 
-public interface IRotatable
+namespace SuperMarketGame
 {
-    void Rotate(Vector2 delta);
+    public interface IRotatable
+    {
+        void Rotate(Vector2 delta);
+    }
 }

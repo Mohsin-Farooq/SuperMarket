@@ -2,31 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CartHandler : MonoBehaviour
+namespace SuperMarketGame
 {
-    [SerializeField] private Transform CartTargetPosition;
-    [SerializeField] private float lerpDuration;
-
-
-    private void Start()
+    public class CartHandler : MonoBehaviour
     {
-        StartCoroutine(LerpCart(CartTargetPosition));
-    }
+        [SerializeField] private Transform CartTargetPosition;
+        [SerializeField] private float lerpDuration;
 
-    private IEnumerator LerpCart(Transform CartTargetPosition)
-    {
-        Vector3 startPosition = transform.position;
-       
-        float elapsedTime = 0f;
 
-        while (elapsedTime < lerpDuration)
+        private void Start()
         {
-            elapsedTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(startPosition, CartTargetPosition.position, elapsedTime / lerpDuration);     
-            yield return null;
+            StartCoroutine(LerpCart(CartTargetPosition));
         }
 
-        transform.position = CartTargetPosition.position;
-        BillingQueueController.instance.ProcessItemOnRamp();
+        private IEnumerator LerpCart(Transform CartTargetPosition)
+        {
+            Vector3 startPosition = transform.position;
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < lerpDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                transform.position = Vector3.Lerp(startPosition, CartTargetPosition.position, elapsedTime / lerpDuration);
+                yield return null;
+            }
+
+            transform.position = CartTargetPosition.position;
+            BillingQueueController.instance.ProcessItemOnRamp();
+        }
     }
 }

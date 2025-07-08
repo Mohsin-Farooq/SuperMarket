@@ -1,6 +1,9 @@
 using System;
 
-public static class CashCounterEvent
+namespace SuperMarketGame
 {
-    public static Action<float> OnAmountUpdate; 
+    public static class CashCounterEvent
+    {
+        public static Action<float> OnAmountUpdate;
+    }
 }

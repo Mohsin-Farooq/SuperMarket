@@ -3,83 +3,86 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+namespace SuperMarketGame
 {
-    public static UIManager Instance;
-
-    [Header("Level Start UI")]
-    [SerializeField] private CanvasGroup levelStartUIPanel;
-    [SerializeField] private Text levelText;
-
-    [Header("Level Complete UI")]
-    [SerializeField] private CanvasGroup levelCompleteUIPanel;
-
-    [Header("Fade Settings")]
-    [SerializeField] private float fadeDuration = 1.5f;
-    [SerializeField] private float delayBeforeFade = 1f;
-    private void Awake()
+    public class UIManager : MonoBehaviour
     {
-        if (Instance == null)
-            Instance = this;
-        else
+        public static UIManager Instance;
+
+        [Header("Level Start UI")]
+        [SerializeField] private CanvasGroup levelStartUIPanel;
+        [SerializeField] private Text levelText;
+
+        [Header("Level Complete UI")]
+        [SerializeField] private CanvasGroup levelCompleteUIPanel;
+
+        [Header("Fade Settings")]
+        [SerializeField] private float fadeDuration = 1.5f;
+        [SerializeField] private float delayBeforeFade = 1f;
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
-        }
-    }
-    public void ShowLevelStartUI(int levelNumber, Action onComplete)
-    {
-        levelText.text = $"Level {levelNumber}";
-        SetCanvasGroupVisible(levelStartUIPanel, true, 0f);
-        StartCoroutine(FadeCanvasGroup(levelStartUIPanel, 0f, 1f, fadeDuration, 0f, () =>
-        {
-            StartCoroutine(FadeCanvasGroup(levelStartUIPanel, 1f, 0f, fadeDuration, delayBeforeFade, () =>
+            if (Instance == null)
+                Instance = this;
+            else
             {
-                levelStartUIPanel.gameObject.SetActive(false);
-                onComplete?.Invoke();
-            }));
-        }));
-    }
-    public void ShowLevelCompleteUI(Action onContinue)
-    {
-       
-        SetCanvasGroupVisible(levelCompleteUIPanel, true, 0f); 
-
-        StartCoroutine(FadeCanvasGroup(levelCompleteUIPanel, 0f, 1f, fadeDuration, delayBeforeFade, () =>
+                Destroy(gameObject);
+                return;
+            }
+        }
+        public void ShowLevelStartUI(int levelNumber, Action onComplete)
         {
-            StartCoroutine(FadeCanvasGroup(levelCompleteUIPanel, 1f, 0f, fadeDuration, delayBeforeFade, () =>
-                {           
-                    onContinue?.Invoke();
-                  
+            levelText.text = $"Level {levelNumber}";
+            SetCanvasGroupVisible(levelStartUIPanel, true, 0f);
+            StartCoroutine(FadeCanvasGroup(levelStartUIPanel, 0f, 1f, fadeDuration, 0f, () =>
+            {
+                StartCoroutine(FadeCanvasGroup(levelStartUIPanel, 1f, 0f, fadeDuration, delayBeforeFade, () =>
+                {
+                    levelStartUIPanel.gameObject.SetActive(false);
+                    onComplete?.Invoke();
                 }));
-        }));
-    }
-    private void SetCanvasGroupVisible(CanvasGroup canvas, bool visible, float alpha)
-    {
-        canvas.gameObject.SetActive(visible);
-        canvas.alpha = alpha;
-        canvas.blocksRaycasts = visible;
-        canvas.interactable = visible;
-    }
-
-    private IEnumerator FadeCanvasGroup(CanvasGroup canvas, float from, float to, float duration, float delay, Action onComplete)
-    {
-        yield return new WaitForSeconds(delay);
-
-        float t = 0f;
-        canvas.alpha = from;
-
-        while (t < duration)
+            }));
+        }
+        public void ShowLevelCompleteUI(Action onContinue)
         {
-            t += Time.deltaTime;
-            canvas.alpha = Mathf.Lerp(from, to, t / duration);
-            yield return null;
+
+            SetCanvasGroupVisible(levelCompleteUIPanel, true, 0f);
+
+            StartCoroutine(FadeCanvasGroup(levelCompleteUIPanel, 0f, 1f, fadeDuration, delayBeforeFade, () =>
+            {
+                StartCoroutine(FadeCanvasGroup(levelCompleteUIPanel, 1f, 0f, fadeDuration, delayBeforeFade, () =>
+                    {
+                        onContinue?.Invoke();
+
+                    }));
+            }));
+        }
+        private void SetCanvasGroupVisible(CanvasGroup canvas, bool visible, float alpha)
+        {
+            canvas.gameObject.SetActive(visible);
+            canvas.alpha = alpha;
+            canvas.blocksRaycasts = visible;
+            canvas.interactable = visible;
         }
 
-        canvas.alpha = to;
-        canvas.blocksRaycasts = to > 0;
-        canvas.interactable = to > 0;
+        private IEnumerator FadeCanvasGroup(CanvasGroup canvas, float from, float to, float duration, float delay, Action onComplete)
+        {
+            yield return new WaitForSeconds(delay);
 
-        onComplete?.Invoke();
+            float t = 0f;
+            canvas.alpha = from;
+
+            while (t < duration)
+            {
+                t += Time.deltaTime;
+                canvas.alpha = Mathf.Lerp(from, to, t / duration);
+                yield return null;
+            }
+
+            canvas.alpha = to;
+            canvas.blocksRaycasts = to > 0;
+            canvas.interactable = to > 0;
+
+            onComplete?.Invoke();
+        }
     }
 }

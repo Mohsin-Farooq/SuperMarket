@@ -1,37 +1,38 @@
-using System;
 using UnityEngine;
 
-public class CameraTrigger : MonoBehaviour
+namespace SuperMarketGame
 {
-    public static CameraTrigger instacne;
-
-    public Transform scanningTarget;
-    [SerializeField] private Transform BillingTransform,LevelCompleteTransform,CameraStartTransorm;
-    
-    private void Awake()
+    public class CameraTrigger : MonoBehaviour
     {
-        instacne = this;
-       
-    }
+        public static CameraTrigger instacne;
 
-    public void TriggerCameraWhenScan()
-    {
-        CameraEventManager.TriggerCameraLerp(scanningTarget);
-    }
-    public void TriggerCameraWhenBill()
-    {
-        CameraEventManager.TriggerCameraLerp(BillingTransform);
-    }
-    public void TriggerCameraWhenComplete()
-    {
+        public Transform scanningTarget;
+        [SerializeField] private Transform BillingTransform, LevelCompleteTransform, CameraStartTransorm;
 
-        CameraEventManager.TriggerCameraLerp(LevelCompleteTransform);
+        private void Awake()
+        {
+            instacne = this;
+
+        }
+        public void TriggerCameraWhenScan()
+        {
+            CameraEventManager.TriggerCameraLerp(scanningTarget);
+        }
+        public void TriggerCameraWhenBill()
+        {
+            CameraEventManager.TriggerCameraLerp(BillingTransform);
+        }
+        public void TriggerCameraWhenComplete()
+        {
+
+            CameraEventManager.TriggerCameraLerp(LevelCompleteTransform);
+        }
+
+        public void TriggerCameraInitialPos()
+        {
+
+            CameraEventManager.TriggerCameraLerp(CameraStartTransorm);
+        }
+
     }
-
-    public void TriggerCameraInitialPos()
-    {
-
-        CameraEventManager.TriggerCameraLerp(CameraStartTransorm);
-    }
-
 }

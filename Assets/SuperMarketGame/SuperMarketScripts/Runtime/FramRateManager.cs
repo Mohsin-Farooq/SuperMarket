@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FramRateManager : MonoBehaviour
+namespace SuperMarketGame
 {
-    private void Awake()
+    public class FramRateManager : MonoBehaviour
     {
-        Application.targetFrameRate = 60;
+        private void Awake()
+        {
+            Application.targetFrameRate = 60;
+        }
     }
 }

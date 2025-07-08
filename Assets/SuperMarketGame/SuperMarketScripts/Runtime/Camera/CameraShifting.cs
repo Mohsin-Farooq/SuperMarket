@@ -1,47 +1,49 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraShifting : MonoBehaviour
+namespace SuperMarketGame
 {
-    public float lerpDuration = 5f;
-
-    private void OnEnable()
+    public class CameraShifting : MonoBehaviour
     {
-        CameraEventManager.OnCameraLerpTriggered += LerpToPosition;
-    }
+        public float lerpDuration = 5f;
 
-    private void OnDisable()
-    {   
-        CameraEventManager.OnCameraLerpTriggered -= LerpToPosition;
-    }
-
-  
-    private void LerpToPosition(Transform cameraTargetTr)
-    { 
-        StartCoroutine(LerpCamera(cameraTargetTr));
-    }
-
-    private IEnumerator LerpCamera(Transform cameraTargetTr)
-    {
-        Vector3 startPosition = transform.position;
-        Quaternion startRotation = transform.rotation;
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < lerpDuration)
+        private void OnEnable()
         {
-            elapsedTime += Time.deltaTime;
-
-          
-            transform.position = Vector3.Lerp(startPosition, cameraTargetTr.position, elapsedTime / lerpDuration);
-            transform.rotation = Quaternion.Lerp(startRotation, cameraTargetTr.rotation, elapsedTime / lerpDuration);
-
-            yield return null; 
+            CameraEventManager.OnCameraLerpTriggered += LerpToPosition;
         }
 
-      
-        transform.position = cameraTargetTr.position;
-        transform.rotation = cameraTargetTr.rotation;
+        private void OnDisable()
+        {
+            CameraEventManager.OnCameraLerpTriggered -= LerpToPosition;
+        }
+
+
+        private void LerpToPosition(Transform cameraTargetTr)
+        {
+            StartCoroutine(LerpCamera(cameraTargetTr));
+        }
+
+        private IEnumerator LerpCamera(Transform cameraTargetTr)
+        {
+            Vector3 startPosition = transform.position;
+            Quaternion startRotation = transform.rotation;
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < lerpDuration)
+            {
+                elapsedTime += Time.deltaTime;
+
+
+                transform.position = Vector3.Lerp(startPosition, cameraTargetTr.position, elapsedTime / lerpDuration);
+                transform.rotation = Quaternion.Lerp(startRotation, cameraTargetTr.rotation, elapsedTime / lerpDuration);
+
+                yield return null;
+            }
+
+
+            transform.position = cameraTargetTr.position;
+            transform.rotation = cameraTargetTr.rotation;
+        }
     }
 }

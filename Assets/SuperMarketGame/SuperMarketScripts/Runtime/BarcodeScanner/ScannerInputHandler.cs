@@ -1,45 +1,48 @@
 using UnityEngine;
 
-public class ScannerInputHandler : ITouchInputHandler
+namespace SuperMarketGame
 {
-    private readonly IDraggable dragHandler;
-    private int activeFingerId = -1;
+    public class ScannerInputHandler : ITouchInputHandler
+    {
+        private readonly IDraggable dragHandler;
+        private int activeFingerId = -1;
 
-    public ScannerInputHandler(IDraggable dragHandler)
-    {
-        this.dragHandler = dragHandler;
-    }
-    public void HandleInput()
-    {
-        if (Input.touchCount > 0)
+        public ScannerInputHandler(IDraggable dragHandler)
         {
-            foreach (Touch touch in Input.touches)
+            this.dragHandler = dragHandler;
+        }
+        public void HandleInput()
+        {
+            if (Input.touchCount > 0)
             {
-                switch (touch.phase)
+                foreach (Touch touch in Input.touches)
                 {
-                    case TouchPhase.Began:
-                        if (activeFingerId == -1)
-                        {
-                            dragHandler.StartDrag(touch.position, touch.fingerId);
-                            activeFingerId = touch.fingerId;
-                        }
-                        break;
+                    switch (touch.phase)
+                    {
+                        case TouchPhase.Began:
+                            if (activeFingerId == -1)
+                            {
+                                dragHandler.StartDrag(touch.position, touch.fingerId);
+                                activeFingerId = touch.fingerId;
+                            }
+                            break;
 
-                    case TouchPhase.Moved:
-                        if (touch.fingerId == activeFingerId)
-                        {
-                            dragHandler.Drag(touch.position, touch.fingerId);
-                        }
-                        break;
+                        case TouchPhase.Moved:
+                            if (touch.fingerId == activeFingerId)
+                            {
+                                dragHandler.Drag(touch.position, touch.fingerId);
+                            }
+                            break;
 
-                    case TouchPhase.Ended:
-                    case TouchPhase.Canceled:
-                        if (touch.fingerId == activeFingerId)
-                        {
-                            dragHandler.EndDrag(touch.fingerId);
-                            activeFingerId = -1;
-                        }
-                        break;
+                        case TouchPhase.Ended:
+                        case TouchPhase.Canceled:
+                            if (touch.fingerId == activeFingerId)
+                            {
+                                dragHandler.EndDrag(touch.fingerId);
+                                activeFingerId = -1;
+                            }
+                            break;
+                    }
                 }
             }
         }

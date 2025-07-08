@@ -1,12 +1,15 @@
 using UnityEngine;
 using System;
 
-public static class CameraEventManager
+namespace SuperMarketGame
 {
-    
-    public static event Action<Transform> OnCameraLerpTriggered;  
-    public static void TriggerCameraLerp(Transform cameraTr)
+    public static class CameraEventManager
     {
-        OnCameraLerpTriggered?.Invoke(cameraTr);
+
+        public static event Action<Transform> OnCameraLerpTriggered;
+        public static void TriggerCameraLerp(Transform cameraTr)
+        {
+            OnCameraLerpTriggered?.Invoke(cameraTr);
+        }
     }
 }
