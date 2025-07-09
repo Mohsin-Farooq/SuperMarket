@@ -15,8 +15,16 @@ namespace SuperMarketGame
         [SerializeField] private AudioClip[] audioClips;
 
         private Dictionary<string, AudioClip> _AudioClipsDic;
+        private static AudioService _instance;
         private void Awake()
         {
+            if (_instance != null && _instance != this)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
+            _instance = this;
+
             _AudioClipsDic = new Dictionary<string, AudioClip>();
 
             foreach (var clips in audioClips)
